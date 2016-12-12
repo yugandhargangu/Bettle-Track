@@ -33,6 +33,7 @@ require(["app"], function (app) {
     'use strict';
     app.controller('LoginController', ['$scope', '$http', function ($scope, $http) {
             var self = this;
+            $('#data-preloader').hide();
             self.alreadySubmit = false;
             self.login = {};
             self.submit = function (loginForm) {
@@ -47,7 +48,7 @@ require(["app"], function (app) {
                         if (data.code == 1) {
                             var dialog = $('#success-dialog').data('dialog');
                             dialog.open();
-                            window.location.href = 'app/admin/index.html';
+                            window.location.href = 'app/index.html';
                         } else {
                             var dialog = $('#error-dialog').data('dialog');
                             dialog.open();

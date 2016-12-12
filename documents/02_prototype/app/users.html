@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bettle Track</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../public/css/metro.min.css"/>
+        <link rel="stylesheet" href="../public/css/metro-icons.min.css"/>
+        <link rel="stylesheet" href="../public/css/metro-responsive.min.css"/>
+        <link rel="stylesheet" href="../public/css/metro-schemes.min.css"/>
+        <link rel="stylesheet" href="../public/css/app.css"/>
+    </head>
+    <body class="bg-steel" ng-app="bettleTrackApp">
+        <div class="app-bar fixed-top navy" ng-include src="'appbar.html'">
+        </div>
+
+        <div class="page-content bg-white auto-size padding10" ng-controller="UsersController as ctrl">
+            <h1 class="text-light"><span class="mif-users"> Users</span></h1>
+            <hr class="thin bg-grayLighter">
+            <button type="button" class="button primary" ng-click="ctrl.showUserInfo(0)"><span class="mif-plus"></span> Create...</button>
+            <button type="button" class="button success"><span class="mif-checkmark"></span> Active</button>
+            <button type="button" class="button warning"><span class="mif-blocked"></span> Block</button>
+            <button type="button" class="button alert"><span class="mif-bin"></span> Delete</button>
+            <hr class="thin bg-grayLighter">
+            <div>
+                <div class="dataTables_length">
+                    <div>
+                        <label>Show 
+                            <select>
+                                <option value="10">10</option>
+                                <option value="10">20</option>
+                                <option value="10">50</option>
+                                <option value="10">100</option>
+                                <option value="10">200</option>
+                                <option value="10">500</option>
+                            </select>
+                            users per page</label>
+                    </div>
+                </div>
+                <table class="table striped hovered cell-auto-size border bordered">
+                    <thead>
+                        <tr>
+                            <th>User Id</th>
+                            <th>Full name</th>
+                            <th>Email Id</th>
+                            <th>User Role</th>
+                            <th>Status</th>
+                            <th>Active/Block</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in users">
+                            <td>Value {{user}}</td>
+                            <td>Value {{user}}</td>
+                            <td>Value {{user}}</td>
+                            <td>Value{{user}}@example.com</td>
+                            <td class="align-center">
+                                <span class="mif-checkmark fg-green" ng-show="ctrl.isEven(user)"> Active</span>
+                                <span class="mif-blocked fg-red" ng-show="ctrl.isOdd(user)"> Blocked</span></td>
+                            <td class="align-center">
+                                <label class="switch">
+                                    <input type="checkbox" ng-checked="ctrl.isEven(user)">
+                                    <span class="check"></span>
+                                </label>
+                            </td>
+                            <td class="align-center">
+                                <button type="button" class="button primary mini-button" ng-click="ctrl.showUserInfo(user)"><span class="mif-pencil"></span> Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="dataTables_paginate">
+                    <button type="button" class="paginate_button current">Previous</button>
+                    <button type="button" class="paginate_button current">Next</button>
+                </div>
+                <div class="dataTables_info">Page 1: showing 1 to 10 of 57 entries</div>
+            </div>
+            <div id="user-info" class="window shadow" data-role="dialog" data-overlay="true" data-overlay-color="modal-overlay">
+                <div class="window-caption">
+                    <span class="window-caption-icon">
+                        <span class="mif-user-md"></span>
+                    </span>
+                    <span class="window-caption-title"> User</span>
+                    <span class="btn-close" ng-click="ctrl.closeUserInfo()"></span>
+                </div>
+                <div class="window-content">
+                    <form name="userInfoForm" ng-submit="ctrl.submitUserInfo(userInfoForm.$valid)" novalidate="true">
+                        <div class="row padding10">
+                            <div class="cell cell-auto-size padding5">
+                                <label>Username</label>
+                                <div class="input-control text full-size" data-role="input">
+                                    <input type="text" name="username" ng-model="ctrl.userInfo.username" ng-required="true">
+                                    <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+                                </div>
+                                <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.username.$error.required">Please enter username.</div>
+                                <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && !userInfoForm.username.$error.required && ctrl.user_existed">Username is already existed.</div>
+                            </div>
+                            <div class="cell cell-auto-size padding5">
+                                <label>Email Id</label>
+                                <div class="input-control text full-size" data-role="input">
+                                    <input type="text" name="email_id" ng-model="ctrl.userInfo.email_id" ng-required="true">
+                                    <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+                                </div>
+                                <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.email_id.$error.required">Please enter user email id.</div>
+                                <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && !userInfoForm.email_id.$error.required && ctrl.user_existed">Email Id is already existed.</div>
+                            </div>
+                            <div class="cell cell-auto-size padding5">
+                                <label>Full name</label>
+                                <div class="input-control text full-size" data-role="input">
+                                    <input type="text" name="fullname" ng-model="ctrl.userInfo.fullname" ng-required="true">
+                                    <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+                                </div>
+                                <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.fullname.$error.required">Please enter user full name.</div>
+                            </div>
+                            <div class="cell cell-auto-size padding5">
+                                <label>User Position</label>
+                                <div class="input-control text full-size" data-role="input">
+                                    <input type="text" name="position" ng-model="ctrl.userInfo.position" ng-required="true">
+                                    <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+                                </div>
+                                <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.position.$error.required">Please enter user position.</div>
+                            </div>
+                            <div class="cell cell-auto-size padding5">
+                                <label>Password</label>
+                                <div class="input-control password full-size" data-role="input">
+                                    <input type="text" name="password" ng-model="ctrl.userInfo.password" ng-required="true">
+                                    <button type="button" class="button helper-button reveal"><span class="mif-looks"></span></button>
+                                </div>
+                                <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.password.$error.required">Please enter user password.</div>
+                            </div>
+                            <div class="cell cell-auto-size padding5">
+                                <label class="switch">
+                                    <input type="checkbox" name="activate_account" ng-model="ctrl.userInfo.activate_account">
+                                    <span class="check"></span>
+                                    <span> Activate Account</span>
+                                </label>
+                            </div>
+                            <div class="form-actions padding5">
+                                <button type="button" class="button primary" ng-click="ctrl.submitUserInfo(userInfoForm.$valid)">
+                                    <span ng-show="ctrl.user_btn_create">Create</span>
+                                    <span ng-show="!ctrl.user_btn_create">Update</span>
+                                </button>
+                                <button type="button" class="button link">Clear</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" data-main="../public/js/app/users" src="../public/js/require.js"></script>
+    </body>
+</html>
