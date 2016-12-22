@@ -1,0 +1,48 @@
+<div id="project-info">
+    <ul class="breadcrumbs2">
+        <li><a href=""><span class="icon mif-home"></span></a></li>
+        <li><a href="">Projects</a></li>
+        <li><a href="">{{ctrl.project.name}}</a></li>
+        <li><a href="">Project Information</a></li>
+    </ul>
+    <div class="example">
+        <div class="cell">
+            <label>Project Code:</label>
+            <div class="input-control full-size ">
+                <input type="text" value="{{ctrl.project.code}}" disabled>
+            </div>
+        </div>
+        <div class="cell">
+            <label>Project Name</label>
+            <div class="input-control full-size ">
+                <input type="text" value="{{ctrl.project.name}}" disabled>
+            </div>
+        </div>
+        <div class="cell">
+            <label>Project Type</label>
+            <div class="input-control full-size ">
+                <input type="text" value="{{ctrl.project.type}}" disabled>
+            </div>
+        </div>
+        <div class="cell">
+            <label>Project Start Date:</label>
+            <div class="input-control full-size ">
+                <input type="text" value="{{ctrl.project.start_date}}" disabled>
+            </div>
+        </div>
+        <div class="cell">
+            <label>Project End Date:</label>
+            <div class="input-control full-size ">
+                <input type="text" value="{{ctrl.project.end_date}}" disabled>
+            </div>
+        </div>
+        <div class="cell">
+            <label>Short Description:</label>
+            <textarea id="short_desc" rows="5" cols="100">{{ctrl.project.short_desc}}</textarea>
+        </div>
+        <div class="cell">
+            <label>Long Description:</label>
+            <textarea id="long_desc" rows="5" cols="100">{{ctrl.project.long_desc}}</textarea>
+        </div>
+    </div>
+</div>

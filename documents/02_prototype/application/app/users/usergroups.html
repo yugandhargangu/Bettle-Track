@@ -1,0 +1,68 @@
+<h1 class="text-light"><span class="mif-users"> User Groups</span></h1>
+<hr class="thin bg-grayLighter">
+<button type="button" class="button primary" ng-click="ctrl.showUserGroupInfo(0)" ng-show="ctrl.buttons.add"><span class="mif-plus"></span> Create Group</button>
+<button type="button" class="button success"><span class="mif-checkmark" ng-show="ctrl.buttons.active"></span> Active</button>
+<button type="button" class="button warning"><span class="mif-blocked" ng-show="ctrl.buttons.block"></span> Block</button>
+<button type="button" class="button alert"><span class="mif-bin" ng-show="ctrl.buttons.delete"></span> Delete</button>
+<hr class="thin bg-grayLighter">
+<div>
+    <div class="dataTables_length">
+        <div>
+            <label>Show 
+                <select>
+                    <option value="10">10</option>
+                    <option value="10">20</option>
+                    <option value="10">50</option>
+                    <option value="10">100</option>
+                    <option value="10">200</option>
+                    <option value="10">500</option>
+                </select>
+                rows per page</label>
+        </div>
+    </div>
+    <table class="table striped hovered cell-auto-size border bordered">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>User Group</th>
+                <th>User Group Email id</th>
+                <th>Status</th>
+                <th>Active/Block</th>
+                <th ng-show="ctrl.buttons.action">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="usergroup in ctrl.usergroups">
+                <td>{{usergroup.id}}</td>
+                <td>{{usergroup.name}}</td>
+                <td>{{usergroup.email_id}}</td>
+                <td class="align-center">
+                    <span class="mif-checkmark fg-green" ng-show="usergroup.status === 1"> Active</span>
+                    <span class="mif-blocked fg-red" ng-show="usergroup.status === 0"> Blocked</span></td>
+                <td class="align-center">
+                    <label class="switch">
+                        <input type="checkbox" ng-checked="usergroup.status === 1">
+                        <span class="check"></span>
+                    </label>
+                </td>
+                <td class="align-center" ng-show="ctrl.buttons.action">
+                    <button type="button" class="button info mini-button" ng-click="ctrl.showUserGroupInfo(usergroup.id)"><span class="mif-bin"></span> Edit</button>
+                    <button type="button" class="button info mini-button" ng-click="ctrl.showGroupUsers(usergroup.id)"><span class="mif-bin"></span> Show users</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="dataTables_paginate">
+        <button type="button" class="paginate_button current">Previous</button>
+        <button type="button" class="paginate_button current">Next</button>
+    </div>
+    <div class="dataTables_info">Page 1: showing 1 to 10 of 57 entries</div>
+</div>
+<div class="window window-top" id="user-group-info" data-role="dialog" data-overlay="true" data-overlay-color="modal-overlay" data-close-button="true">
+    <div class="window-caption padding10">
+        <span class="window-caption-title">User Group Information</span>
+    </div>
+    <div class="window-content padding20" ui-view="">
+
+    </div>
+</div>

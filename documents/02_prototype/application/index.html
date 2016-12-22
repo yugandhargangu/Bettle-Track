@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bettle Track</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="public/css/metro.min.css"/>
+        <link rel="stylesheet" href="public/css/metro-icons.min.css"/>
+        <link rel="stylesheet" href="public/css/metro-responsive.min.css"/>
+        <link rel="stylesheet" href="public/css/metro-schemes.min.css"/>
+        <link rel="stylesheet" href="public/css/app.css"/>
+    </head>
+    <body ng-app="bettleTrackApp">
+
+        <div class="login-form padding20 block-shadow" ng-controller="LoginController as ctrl">
+            <form name="loginForm" novalidate="true" ng-submit="ctrl.submit(loginForm)">
+                <h1 class="text-light">Login to service</h1>
+                <hr class="thin"/>
+                <div class="row">
+                    <div class="cell cell-auto-size">
+                        <label>Username or Email Id</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" placeholder="Username or Email Id" maxlength="50" name="username" ng-model="ctrl.login.username" ng-required="true">
+                            <button class="button helper-button clear"><span class="mif-cross"></span></button>
+                        </div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.alreadySubmit && loginForm.username.$error.required">Please enter your username or email id.</div>
+                    </div>
+                    <div class="cell cell-auto-size">
+                        <label>Password</label>
+                        <div class="input-control password full-size" data-role="input">
+                            <input type="password" placeholder="Password" maxlength="20" name="password" ng-model="ctrl.login.password" ng-required="true">
+                            <button class="button helper-button reveal"><span class="mif-looks"></span></button>
+                        </div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.alreadySubmit && loginForm.password.$error.required">Please enter your password.</div>
+                    </div>
+                    <div class="cell cell-auto-size">
+                        <label class="input-control checkbox small-check">
+                            <input type="checkbox" ng-model="ctrl.login.remember_me">
+                            <span class="check"></span>
+                            <span class="caption">Remember me</span>
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="button primary" ng-click="ctrl.submit(loginForm)">Login to...</button>
+                        <a href="#" class="button link">Forgot your password?</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="window block-shadow-success" data-role="dialog" id="success-dialog" data-overlay="true" data-overlay-color="modal-overlay" data-close-button="true">
+            <div class="window-caption">
+                <span class="window-caption-title">Login Success</span>
+            </div>
+            <div class="window-content fg-green padding100">
+                <p>Login successful. Please wait while redirecting...</p>
+            </div>
+        </div>
+        <div class="window block-shadow-danger" data-role="dialog" id="error-dialog" data-overlay="true" data-overlay-color="modal-overlay" data-close-button="true">
+            <div class="window-caption fg-red">
+                <span class="window-caption-title">Login Error</span>
+            </div>
+            <div class="window-content fg-red padding100">
+                <h4>Login failed. Please try again.</h4>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var baseUrl = '';
+        </script>
+        <script type="text/javascript" src="public/js/lib/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="public/js/lib/metro.min.js"></script>
+        <script type="text/javascript" src="public/js/lib/angular.min.js"></script>
+        <script type="text/javascript" src="public/js/lib/angular-resource.min.js"></script>
+        <script type="text/javascript" src="public/js/main.js"></script>
+        <script type="text/javascript" src="public/js/app/login.js"></script>
+    </body>
+</html>

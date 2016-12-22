@@ -1,0 +1,166 @@
+<ul class="breadcrumbs2">
+    <li><a href=""><span class="icon mif-home"></span></a></li>
+    <li><a href="">Issues</a></li>
+    <li><a href="">Filters</a></li>
+</ul>
+<h3>Filters</h3>
+<div class="example example-less" ng-show="ctrl.showSearch">
+    <form method="post" name="filter_search" novalidate>
+        <div class="grid">
+            <div class="row row-nomargin cell-auto-size">
+                <div class="cell">
+                    <label>Filter name</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" placeholder="Filter name">
+                    </div>
+                </div>
+                <div class="cell">
+                    <label>Owner</label>
+                    <div class="input-control full-size">
+                        <select name="filter_owner" multiple id="filter_owner_select" style="width: 100%">
+                            <option value="1">Owner One</option>
+                            <option value="2">Owner Two</option>
+                            <option value="3">Owner Three</option>
+                            <option value="4">Owner Four</option>
+                            <option value="5">Owner Five</option>
+                            <option value="6">Owner Six</option>
+                            <option value="7">Owner Seven</option>
+                            <option value="8">Owner Eight</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="cell">
+                    <label>Shared with</label>
+                    <div class="input-control full-size">
+                        <select name="filter_share" multiple id="filter_share_select"  style="width: 100%">
+                            <option value="1">Every One</option>
+                            <option value="2">Project One</option>
+                            <option value="3">Project Two</option>
+                            <option value="4">Project Three</option>
+                            <option value="5">Group One</option>
+                            <option value="6">Group Two</option>
+                            <option value="7">Group Three</option>
+                            <option value="8">Group Four</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="cell">
+                    <div class="form-actions">
+                        <button type="button" class="button primary" style="float: right;margin-top: 1.2rem;">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="dataTables_length">
+    <div>
+        <label>Show 
+            <select>
+                <option value="10">10</option>
+                <option value="10">20</option>
+                <option value="10">50</option>
+                <option value="10">100</option>
+                <option value="10">200</option>
+                <option value="10">500</option>
+            </select>
+            filters per page</label>
+    </div>
+</div>
+<div class="dataTables_filter">
+    <select name="filters_type" ng-model="ctrl.changeFilterId" ng-change="ctrl.changeFilterType()">
+        <option value="0">My filters only</option>
+        <option value="1">Popular filters</option>
+        <option value="2">My project filters</option>
+        <option value="4">Search filters</option>
+    </select>
+</div>
+<table class="table striped hovered cell-auto-size border bordered">
+    <thead>
+        <tr>
+            <th>Filter code</th>
+            <th>Filter name</th>
+            <th>Owner</th>
+            <th>Shared with</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="filter in ctrl.filters">
+            <td>{{filter.code}}</td>
+            <td>{{filter.name}}</td>
+            <td>{{filter.owner}}</td>
+            <td>{{filter.share}}</td>
+            <td class="align-center">
+                <button class="button mini-button" ng-click="ctrl.showFilterEdit(0)">Edit</button>
+                <button class="button mini-button">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="dataTables_paginate">
+    <button type="button" class="paginate_button current">Previous</button>
+    <button type="button" class="paginate_button current">Next</button>
+</div>
+<div class="dataTables_info">Page 1: showing 1 to 10 of 57 entries</div>
+<div id="filter-edit-window" class="window shadow window-top" data-role="dialog" data-overlay="true" data-overlay-color="modal-overlay" data-close-button="true">
+    <div class="window-caption padding10">
+        <span class="window-caption-title">Edit Filter</span>
+    </div>
+    <div class="window-content padding20">
+        <form method="post" novalidate name="filter_form">
+            <div class="row cell-auto-size">
+                <div class="cell auto-size">
+                    <label>Filter Name</label>
+                    <div class="input-control text full-size" data-role="input">
+                        <input type="text" name="filter_name">
+                    </div>
+                </div>
+            </div>
+            <div class="row cell-auto-size">
+                <div class="cell auto-size">
+                    <label>Description</label>
+                    <textarea name="filter_description" id="filter_desc" rows="5" cols="100">
+                    </textarea>
+                </div>
+            </div>
+            <div class="row cell-auto-size">
+                <div class="cell auto-size">
+                    <label>Share with</label>
+                    <div class="input-control select full-size" data-role="input">
+                        <select name="share_type" id="share_type">
+                            <option value="0" selected="">Not shared</option>
+                            <option value="1">Everyone</option>
+                            <option value="2">Group</option>
+                            <option value="3">Project</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row cell-auto-size">
+                <div class="cell auto-size">
+                    <label>Share with</label>
+                    <div class="input-control select full-size" data-role="input">
+                        <select name="share_with" id="share_with" multiple="multiple">
+                            <option value="0">Group One</option>
+                            <option value="1">Group Two</option>
+                            <option value="2">Group Three</option>
+                            <option value="3">Group Four</option>
+                            <option value="4">Group Five</option>
+                            <option value="5">Group Six</option>
+                            <option value="6">Group Seven</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row cell-auto-size">
+                <div class="cell auto-size">
+                    <div class="form-actions">
+                        <button type="button" class="button primary">Save</button>
+                        <button type="button" class="button link">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<h3>Details</h3>
+<button type="button" class="button primary" style="float: right;margin-top: -2.5rem;"><span class="mif-floppy-disk"></span> Save</button>
+<hr class="thin bg-grayLighter">
+<form method="post" name="details_form">
+    <div class="grid">
+        <div class="row row-nomargin cell-auto-size">
+            <div class="cell auto-size">
+                <label>Test set ID</label>
+                <div class="input-control text full-size">
+                    <input type="text" disabled>
+                </div>
+            </div>
+            <div class="cell auto-size">
+                <label>Test set name</label>
+                <div class="input-control text full-size" data-role="input">
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+        <div class="row row-nomargin cell-auto-size">
+            <div class="cell auto-size">
+                <label>Designer</label>
+                <div class="input-control text full-size">
+                    <input type="text" disabled value="10587464">
+                </div>
+            </div>
+            <div class="cell auto-size">
+                <label>Creation Date</label>
+                <div class="input-control text full-size">
+                    <input type="text" disabled value="2016-12-22">
+                </div>
+            </div>
+        </div>
+        <div class="row row-nomargin cell-auto-size">
+            <div class="cell auto-size">
+                <label>Status</label>
+                <div class="input-control select full-size" data-role="select">
+                    <select>
+                        <option>Approved</option>
+                        <option>Design</option>
+                        <option>Imported</option>
+                        <option>N/A</option>
+                        <option>New</option>
+                        <option>Obsolete</option>
+                        <option>Pending approval</option>
+                        <option>Redesign</option>
+                    </select>
+                </div>
+            </div>
+            <div class="cell auto-size">
+                <label>Priority</label>
+                <div class="input-control select full-size" data-role="select">
+                    <select>
+                        <option>High</option>
+                        <option>Medium</option>
+                        <option>Low</option>
+                        <option>Lower</option>
+                        <option>Lowest</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row row-nomargin cell-auto-size">
+            <div class="cell auto-size">
+                <label>Description</label>
+                <textarea rows="5" cols="100" id="test_desc"></textarea>
+            </div>
+        </div>
+        <div class="row row-nomargin cell-auto-size">
+            <div class="cell auto-size">
+                <label>Comments</label>
+                <textarea rows="5" cols="100" id="test_comments"></textarea>
+            </div>
+        </div>
+    </div>
+</form>

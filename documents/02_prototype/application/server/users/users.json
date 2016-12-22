@@ -1,0 +1,85 @@
+{
+    "usergroup": "All users",
+    "users": [
+        {
+            "id": 1,
+            "username": "usr0101",
+            "fullname": "User One",
+            "email_id": "user_one@example.com",
+            "role": "Administrator",
+            "status": 1
+        },
+        {
+            "id": 2,
+            "username": "usr0102",
+            "fullname": "User Two",
+            "email_id": "user_two@example.com",
+            "role": "Project Manager",
+            "status": 0
+        },
+        {
+            "id": 3,
+            "username": "usr0103",
+            "fullname": "User Three",
+            "email_id": "user_three@example.com",
+            "role": "Project Leader",
+            "status": 1
+        },
+        {
+            "id": 4,
+            "username": "usr0104",
+            "fullname": "User Four",
+            "email_id": "user_four@example.com",
+            "role": "Design team leader",
+            "status": 0
+        },
+        {
+            "id": 5,
+            "username": "usr0105",
+            "fullname": "User Five",
+            "email_id": "user_five@example.com",
+            "role": "Development team leader",
+            "status": 1
+        },
+        {
+            "id": 6,
+            "username": "usr0106",
+            "fullname": "User Six",
+            "email_id": "user_six@example.com",
+            "role": "Test team leader",
+            "status": 0
+        },
+        {
+            "id": 7,
+            "username": "usr0107",
+            "fullname": "User Seven",
+            "email_id": "user_seven@example.com",
+            "role": "Senior designer",
+            "status": 1
+        },
+        {
+            "id": 8,
+            "username": "usr0108",
+            "fullname": "User Eight",
+            "email_id": "user_eight@example.com",
+            "role": "Senior Programmer",
+            "status": 0
+        },
+        {
+            "id": 9,
+            "username": "usr0109",
+            "fullname": "User Nine",
+            "email_id": "user_nine@example.com",
+            "role": "Tester",
+            "status": 1
+        },
+        {
+            "id": 10,
+            "username": "usr0110",
+            "fullname": "User Ten",
+            "email_id": "user_ten@example.com",
+            "role": "Programmer",
+            "status": 0
+        }
+    ]
+}

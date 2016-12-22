@@ -1,0 +1,53 @@
+<div class="cell auto-size">
+    <div class="dataTables_length">
+        <div>
+            <label>Show 
+                <select>
+                    <option value="10">10</option>
+                    <option value="10">20</option>
+                    <option value="10">50</option>
+                    <option value="10">100</option>
+                    <option value="10">200</option>
+                    <option value="10">500</option>
+                </select>
+                issues per page</label>
+        </div>
+    </div>
+    <table class="table striped hovered cell-auto-size border bordered">
+        <thead>
+            <tr>
+                <th>Issue Type</th>
+                <th>Key</th>
+                <th>Summary</th>
+                <th>Assignee</th>
+                <th>Reporter</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Resolution</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+                <th>Due date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="issue in ctrl.issues">
+                <td>Bug</td>
+                <td>Key {{issue}}</td>
+                <td>[DoraAnna] jp.kddilabs.smartnetwork.troubleshooting Application crash is occurring multiple times in JP market {{issue}}</td>
+                <td>Assignee {{issue}}</td>
+                <td>Reporter {{issue}}</td>
+                <td>Priority {{issue}}</td>
+                <td>Status {{issue}}</td>
+                <td>Resolution {{issue}}</td>
+                <td>2016-04-15</td>
+                <td>2016-12-12</td>
+                <td>2017-12-10</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="dataTables_paginate">
+        <button type="button" class="paginate_button current">Previous</button>
+        <button type="button" class="paginate_button current">Next</button>
+    </div>
+    <div class="dataTables_info">Page 1: showing 1 to 10 of 57 entries</div>
+</div>

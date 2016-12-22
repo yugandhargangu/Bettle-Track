@@ -1,0 +1,21 @@
+<div id="project-pages">
+    <ul class="breadcrumbs2">
+        <li><a href=""><span class="icon mif-home"></span></a></li>
+        <li><a href="">Projects</a></li>
+        <li><a href="">{{ctrl.project_name}}</a></li>
+        <li><a href="">Pages</a></li>
+    </ul>
+    <div class="row" style="width: 100%;">
+        <ul class="bullet-on">
+            <li ng-repeat="page in ctrl.pages"><a href="" class="button link" ng-click="ctrl.openPage(page.id)">{{page.name}}</a></li>
+        </ul>
+    </div>
+</div>
+<div id="page-info" class="window fullscreen-dialog" data-role="dialog" data-overlay="true" data-overlay-color="modal-overlay" data-close-button="true">
+    <div class="window-caption padding10">
+        <span class="window-caption-title">Page: {{ctrl.page_name}}</span>
+    </div>    
+    <div class="window-content padding20">
+        <textarea id="page-content" rows="20" cols="100"></textarea>
+    </div>
+</div>

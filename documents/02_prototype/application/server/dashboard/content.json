@@ -1,0 +1,285 @@
+{
+    "content": [
+        {
+            "head": "Table Data",
+            "sub": {
+                "value": false
+            },
+            "content": {
+                "type": "table",
+                "data": {
+                    "thead": [
+                        "Name",
+                        "Column One",
+                        "Column Two"
+                    ],
+                    "tbody": [
+                        ["Column Name 1", "Column Value 1", "Column Two 1"],
+                        ["Column Name 2", "Column Value 2", "Column Two 2"],
+                        ["Column Name 3", "Column Value 3", "Column Two 3"],
+                        ["Column Name 4", "Column Value 4", "Column Two 4"],
+                        ["Column Name 5", "Column Value 5", "Column Two 5"],
+                        ["Column Name 6", "Column Value 6", "Column Two 6"],
+                        ["Column Name 7", "Column Value 7", "Column Two 7"]
+                    ]
+                }
+            }
+        },
+        {
+            "head": "Chart Section One",
+            "sub": {
+                "value": true,
+                "count": 3
+            },
+            "content": [
+                {
+                    "head": "Bar Chart",
+                    "type": "chart",
+                    "data": {
+                        "type": "bar",
+                        "data": {
+                            "labels": ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            "datasets": [{
+                                    "label": "# of Votes",
+                                    "data": [12, 19, 3, 5, 2, 3],
+                                    "backgroundColor": [
+                                        "rgba(255, 99, 132, 0.2)",
+                                        "rgba(54, 162, 235, 0.2)",
+                                        "rgba(255, 206, 86, 0.2)",
+                                        "rgba(75, 192, 192, 0.2)",
+                                        "rgba(153, 102, 255, 0.2)",
+                                        "rgba(255, 159, 64, 0.2)"
+                                    ],
+                                    "borderColor": [
+                                        "rgba(255,99,132,1)",
+                                        "rgba(54, 162, 235, 1)",
+                                        "rgba(255, 206, 86, 1)",
+                                        "rgba(75, 192, 192, 1)",
+                                        "rgba(153, 102, 255, 1)",
+                                        "rgba(255, 159, 64, 1)"
+                                    ],
+                                    "borderWidth": 1
+                                }]
+                        },
+                        "options": {
+                            "scales": {
+                                "yAxes": [{
+                                        "ticks": {
+                                            "beginAtZero": true
+                                        }
+                                    }]
+                            }
+                        }
+                    }
+                },
+                {
+                    "head": "Line Chart",
+                    "type": "chart",
+                    "data": {
+                        "type": "line",
+                        "data": {
+                            "labels": ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            "datasets": [{
+                                    "label": "# of Votes",
+                                    "data": [12, 19, 3, 5, 2, 3],
+                                    "backgroundColor": [
+                                        "rgba(255, 99, 132, 0.2)",
+                                        "rgba(54, 162, 235, 0.2)",
+                                        "rgba(255, 206, 86, 0.2)",
+                                        "rgba(75, 192, 192, 0.2)",
+                                        "rgba(153, 102, 255, 0.2)",
+                                        "rgba(255, 159, 64, 0.2)"
+                                    ],
+                                    "borderColor": [
+                                        "rgba(255,99,132,1)",
+                                        "rgba(54, 162, 235, 1)",
+                                        "rgba(255, 206, 86, 1)",
+                                        "rgba(75, 192, 192, 1)",
+                                        "rgba(153, 102, 255, 1)",
+                                        "rgba(255, 159, 64, 1)"
+                                    ],
+                                    "borderWidth": 1
+                                }]
+                        },
+                        "options": {
+                            "scales": {
+                                "yAxes": [{
+                                        "ticks": {
+                                            "beginAtZero": true
+                                        }
+                                    }]
+                            }
+                        }
+                    }
+                }, {
+                    "head": "Radar Chart",
+                    "type": "chart",
+                    "data": {
+                        "type": "radar",
+                        "data": {
+                            "labels": ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            "datasets": [{
+                                    "label": "# of Votes",
+                                    "data": [12, 19, 3, 5, 2, 3],
+                                    "backgroundColor": [
+                                        "rgba(255, 99, 132, 0.2)",
+                                        "rgba(54, 162, 235, 0.2)",
+                                        "rgba(255, 206, 86, 0.2)",
+                                        "rgba(75, 192, 192, 0.2)",
+                                        "rgba(153, 102, 255, 0.2)",
+                                        "rgba(255, 159, 64, 0.2)"
+                                    ],
+                                    "borderColor": [
+                                        "rgba(255,99,132,1)",
+                                        "rgba(54, 162, 235, 1)",
+                                        "rgba(255, 206, 86, 1)",
+                                        "rgba(75, 192, 192, 1)",
+                                        "rgba(153, 102, 255, 1)",
+                                        "rgba(255, 159, 64, 1)"
+                                    ],
+                                    "borderWidth": 1
+                                }]
+                        },
+                        "options": {
+                            "scales": {
+                                "yAxes": [{
+                                        "ticks": {
+                                            "beginAtZero": true
+                                        }
+                                    }]
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "head": "Chart Section Two",
+            "sub": {
+                "value": true,
+                "count": 3
+            },
+            "content": [
+                {
+                    "head": "Polar Area Chart",
+                    "type": "chart",
+                    "data": {
+                        "type": "polarArea",
+                        "data": {
+                            "labels": ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            "datasets": [{
+                                    "label": "# of Votes",
+                                    "data": [12, 19, 3, 5, 2, 3],
+                                    "backgroundColor": [
+                                        "rgba(255, 99, 132, 0.2)",
+                                        "rgba(54, 162, 235, 0.2)",
+                                        "rgba(255, 206, 86, 0.2)",
+                                        "rgba(75, 192, 192, 0.2)",
+                                        "rgba(153, 102, 255, 0.2)",
+                                        "rgba(255, 159, 64, 0.2)"
+                                    ],
+                                    "borderColor": [
+                                        "rgba(255,99,132,1)",
+                                        "rgba(54, 162, 235, 1)",
+                                        "rgba(255, 206, 86, 1)",
+                                        "rgba(75, 192, 192, 1)",
+                                        "rgba(153, 102, 255, 1)",
+                                        "rgba(255, 159, 64, 1)"
+                                    ],
+                                    "borderWidth": 1
+                                }]
+                        },
+                        "options": {
+                            "scales": {
+                                "yAxes": [{
+                                        "ticks": {
+                                            "beginAtZero": true
+                                        }
+                                    }]
+                            }
+                        }
+                    }
+                },
+                {
+                    "head": "Pie Chart",
+                    "type": "chart",
+                    "data": {
+                        "type": "pie",
+                        "data": {
+                            "labels": ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            "datasets": [{
+                                    "label": "# of Votes",
+                                    "data": [12, 19, 3, 5, 2, 3],
+                                    "backgroundColor": [
+                                        "rgba(255, 99, 132, 0.2)",
+                                        "rgba(54, 162, 235, 0.2)",
+                                        "rgba(255, 206, 86, 0.2)",
+                                        "rgba(75, 192, 192, 0.2)",
+                                        "rgba(153, 102, 255, 0.2)",
+                                        "rgba(255, 159, 64, 0.2)"
+                                    ],
+                                    "borderColor": [
+                                        "rgba(255,99,132,1)",
+                                        "rgba(54, 162, 235, 1)",
+                                        "rgba(255, 206, 86, 1)",
+                                        "rgba(75, 192, 192, 1)",
+                                        "rgba(153, 102, 255, 1)",
+                                        "rgba(255, 159, 64, 1)"
+                                    ],
+                                    "borderWidth": 1
+                                }]
+                        },
+                        "options": {
+                            "scales": {
+                                "yAxes": [{
+                                        "ticks": {
+                                            "beginAtZero": true
+                                        }
+                                    }]
+                            }
+                        }
+                    }
+                }, {
+                    "head": "Doughnut Chart",
+                    "type": "chart",
+                    "data": {
+                        "type": "doughnut",
+                        "data": {
+                            "labels": ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            "datasets": [{
+                                    "label": "# of Votes",
+                                    "data": [12, 19, 3, 5, 2, 3],
+                                    "backgroundColor": [
+                                        "rgba(255, 99, 132, 0.2)",
+                                        "rgba(54, 162, 235, 0.2)",
+                                        "rgba(255, 206, 86, 0.2)",
+                                        "rgba(75, 192, 192, 0.2)",
+                                        "rgba(153, 102, 255, 0.2)",
+                                        "rgba(255, 159, 64, 0.2)"
+                                    ],
+                                    "borderColor": [
+                                        "rgba(255,99,132,1)",
+                                        "rgba(54, 162, 235, 1)",
+                                        "rgba(255, 206, 86, 1)",
+                                        "rgba(75, 192, 192, 1)",
+                                        "rgba(153, 102, 255, 1)",
+                                        "rgba(255, 159, 64, 1)"
+                                    ],
+                                    "borderWidth": 1
+                                }]
+                        },
+                        "options": {
+                            "scales": {
+                                "yAxes": [{
+                                        "ticks": {
+                                            "beginAtZero": true
+                                        }
+                                    }]
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

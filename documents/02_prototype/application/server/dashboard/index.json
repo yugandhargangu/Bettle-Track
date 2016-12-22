@@ -1,0 +1,44 @@
+{
+    "dashbaords": [
+        {
+            "id": 1,
+            "name": "Dashboard One"
+        },
+        {
+            "id": 2,
+            "name": "Dashboard Two"
+        },
+        {
+            "id": 3,
+            "name": "Dashboard Three"
+        },
+        {
+            "id": 4,
+            "name": "Dashboard Four"
+        },
+        {
+            "id": 5,
+            "name": "Dashboard Five"
+        },
+        {
+            "id": 6,
+            "name": "Dashboard Six"
+        },
+        {
+            "id": 7,
+            "name": "Dashboard Seven"
+        },
+        {
+            "id": 8,
+            "name": "Dashboard Eight"
+        },
+        {
+            "id": 9,
+            "name": "Dashboard Nine"
+        },
+        {
+            "id": 10,
+            "name": "Dashboard Ten"
+        }
+    ]
+}

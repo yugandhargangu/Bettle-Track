@@ -1,0 +1,46 @@
+{
+    "project_id": 1,
+    "project_name": "Some project name",
+    "modules": [
+        {
+            "id": 1,
+            "name": "Module One"
+        },
+        {
+            "id": 2,
+            "name": "Module Two"
+        },
+        {
+            "id": 3,
+            "name": "Module Three"
+        },
+        {
+            "id": 4,
+            "name": "Module Four"
+        },
+        {
+            "id": 5,
+            "name": "Module Five"
+        },
+        {
+            "id": 6,
+            "name": "Module Six"
+        },
+        {
+            "id": 7,
+            "name": "Module Seven"
+        },
+        {
+            "id": 8,
+            "name": "Module Eight"
+        },
+        {
+            "id": 9,
+            "name": "Module Nine"
+        },
+        {
+            "id": 10,
+            "name": "Module Ten"
+        }
+    ]
+}

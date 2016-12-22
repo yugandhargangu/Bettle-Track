@@ -1,0 +1,74 @@
+{
+    "filters": [
+        {
+            "id": 1,
+            "code": "FILTER_CODE_1",
+            "name": "Filter name one",
+            "owner": "Yugandhar@bettletrack.com (Yugandhar gangu)",
+            "share": "Every One"
+        },
+        {
+            "id": 2,
+            "code": "FILTER_CODE_2",
+            "name": "Filter name two",
+            "owner": "Shashank@bettletrack.com (Shashank)",
+            "share": "Private filter"
+        },
+        {
+            "id": 3,
+            "code": "FILTER_CODE_3",
+            "name": "Filter name three",
+            "owner": "Yugandhar@bettletrack.com (Yugandhar gangu)",
+            "share": "Group"
+        },
+        {
+            "id": 4,
+            "code": "FILTER_CODE_4",
+            "name": "Filter name four",
+            "owner": "Yugandhar@bettletrack.com (Yugandhar gangu)",
+            "share": "Project"
+        },
+        {
+            "id": 5,
+            "code": "FILTER_CODE_5",
+            "name": "Filter name five",
+            "owner": "Yugandhar@bettletrack.com (Yugandhar gangu)",
+            "share": "Every One"
+        },
+        {
+            "id": 6,
+            "code": "FILTER_CODE_6",
+            "name": "Filter name six",
+            "owner": "Yugandhar@bettletrack.com (Yugandhar gangu)",
+            "share": "Every One"
+        },
+        {
+            "id": 7,
+            "code": "FILTER_CODE_7",
+            "name": "Filter name seven",
+            "owner": "Yugandhar@bettletrack.com (Yugandhar gangu)",
+            "share": "Every One"
+        },
+        {
+            "id": 8,
+            "code": "FILTER_CODE_8",
+            "name": "Filter name eight",
+            "owner": "Yugandhar@bettletrack.com (Yugandhar gangu)",
+            "share": "Every One"
+        },
+        {
+            "id": 9,
+            "code": "FILTER_CODE_9",
+            "name": "Filter name nine",
+            "owner": "Yugandhar@bettletrack.com (Yugandhar gangu)",
+            "share": "Every One"
+        },
+        {
+            "id": 10,
+            "code": "FILTER_CODE_10",
+            "name": "Filter name ten",
+            "owner": "Yugandhar@bettletrack.com (Yugandhar gangu)",
+            "share": "Every One"
+        }
+    ]
+}

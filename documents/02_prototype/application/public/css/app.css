@@ -1,0 +1,192 @@
+html{
+    font-size: 90%;
+}
+
+.login-form {
+    width: 25rem;
+    position: fixed;
+    top: 40%;
+    margin-top: -9.375rem;
+    left: 50%;
+    margin-left: -12.5rem;
+    background-color: #ffffff;
+    opacity: 1;
+    -webkit-transform: scale(.8);
+    transform: scale(.8);
+}
+
+.hint2{
+    position: relative;
+}
+
+.page-content {
+    padding-top: 3.125rem;
+    min-height: 100%;
+    height: 100%;
+}
+
+.modal-overlay{
+    background-color: rgba(0,0,0,0.5);
+}
+
+.sidebar li{
+    height: auto;
+}
+
+.sidebar li a {
+    padding: .625rem 1rem .625rem 1rem;
+}
+
+.sidebar li a .title-large{
+    font-size: 0.8rem;
+}
+
+.sidebar2-auto{
+    width: auto;
+    max-width: 25rem;
+}
+
+#data-preloader{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 9999;
+}
+
+.view-btn{
+    margin-top: -7px;
+    margin-right: 3px;
+}
+
+.grid .row-nomargin{
+    margin: 0;
+}
+
+.select2-hidden-accessible{
+    display: none;
+}
+
+.select2-selection--multiple{
+    overflow-y: auto;
+    height: 2.125rem;
+}
+
+.example-less {
+    padding: .125rem 0.525rem .125rem 1.0rem;
+}
+
+.issues{
+
+}
+
+.issues-sidebar{
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-right: 1px solid #DDD;
+    display: inline-block;
+}
+
+.tests-sidebar{
+    overflow-y: auto;
+    overflow-x: auto;
+    border-right: 1px solid #DDD;
+    display: inline-block;
+}
+
+.issues-sidebar .single-issue{
+    display: block;
+    padding: 0.225rem;
+    border-bottom: 1px solid #ddd;
+}
+.single-issue .title{
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    padding-bottom: 0.125rem;
+}
+.single-issue .summary{
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+.issues-view{
+    overflow:auto;
+    display: inline-block;
+    border: 1px solid #ddd;
+}
+
+.dataTables_paginate-full{
+    width: 100%;
+}
+
+.sidebar-toggle-btn{
+    position: absolute;
+    cursor: pointer;
+    padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+    z-index: 3;
+    margin-left: -0.5rem;
+}
+
+.fullscreen-dialog{
+    width: 90%;
+    min-width: 90%;
+    height: 90%;
+    min-height: 90%;
+    max-height: 90%;
+    overflow:auto;
+}
+
+.cursor-edit{
+    cursor: text;
+    min-width: 10rem;
+    min-height: 2.2rem;
+}
+
+.tool-button{
+    margin-right: 1rem;
+}
+
+.window-top{
+    top:50px !important;
+}
+
+.app-bar .app-bar-menu > li.active{
+    background-color: #ffffff;
+    color: #0072c6;
+}
+
+.app-bar .app-bar-menu > li.active:hover{
+    color: #ffffff;
+}
+
+.dataTables_filter select {
+    appearance: none;
+    margin: 0 .125rem;
+    border: 1px solid #d9d9d9;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    padding: .3125rem;
+}
+
+.treeview ul :hover{
+    background-color: white;
+}
+
+.treeview li.node-bg-white{
+    background-color: white;
+}
+
+@media screen and (max-width: 800px){
+    #cell-sidebar {
+        flex-basis: 52px;
+    }
+    #cell-content {
+        flex-basis: calc(100% - 52px);
+    }
+}
+

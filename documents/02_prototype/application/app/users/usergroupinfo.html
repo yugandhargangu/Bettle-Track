@@ -1,0 +1,41 @@
+<form name="userGroupInfoForm" ng-submit="ctrl.submitUserGroupInfo(userGroupInfoForm.$valid)" novalidate="true">
+    <div class="row cell-auto-size padding10">
+        <div class="cell auto-size padding5">
+            <label>Email Id</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" name="email_id" ng-model="ctrl.userGroupInfo.email_id" ng-required="true">
+                <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+            </div>
+            <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userGroupInfoSubmitted && userGroupInfoForm.email_id.$error.required">Please enter user group email id.</div>
+            <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userGroupInfoSubmitted && !userGroupInfoForm.email_id.$error.required && ctrl.user_existed">Email Id is already existed.</div>
+        </div>
+    </div>
+    <div class="row cell-auto-size padding10">
+        <div class="cell auto-size padding5">
+            <label>Group name</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" name="fullname" ng-model="ctrl.userGroupInfo.fullname" ng-required="true">
+                <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+            </div>
+            <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userGroupInfoSubmitted && userGroupInfoForm.fullname.$error.required">Please enter group name.</div>
+        </div>
+    </div>
+    <div class="row cell-auto-size padding10">
+        <div class="cell auto-size padding5">
+            <label class="switch">
+                <input type="checkbox" name="activate_account" ng-model="ctrl.userGroupInfo.activate_account">
+                <span class="check"></span>
+                <span> Activate User Group</span>
+            </label>
+        </div>
+    </div>
+    <div class="row cell-auto-size padding10">
+        <div class="form-actions padding5">
+            <button type="button" class="button primary" ng-click="ctrl.submitUserGroupInfo(userGroupInfoForm.$valid)">
+                <span ng-show="ctrl.user_btn_create">Create</span>
+                <span ng-show="!ctrl.user_btn_create">Update</span>
+            </button>
+            <button type="button" class="button link">Clear</button>
+        </div>
+    </div>
+</form>

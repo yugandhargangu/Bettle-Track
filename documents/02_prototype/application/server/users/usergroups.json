@@ -1,0 +1,64 @@
+{
+    "user_groups": [
+        {
+            "id": 1,
+            "name": "User Group One",
+            "email_id": "user_group_one@example.com",
+            "status": 1
+        },
+        {
+            "id": 2,
+            "name": "User Group Two",
+            "email_id": "user_group_two@example.com",
+            "status": 0
+        },
+        {
+            "id": 3,
+            "name": "User Group Three",
+            "email_id": "user_group_three@example.com",
+            "status": 1
+        },
+        {
+            "id": 4,
+            "name": "User Group Four",
+            "email_id": "user_group_four@example.com",
+            "status": 0
+        },
+        {
+            "id": 5,
+            "name": "User Group Five",
+            "email_id": "user_group_five@example.com",
+            "status": 1
+        },
+        {
+            "id": 6,
+            "name": "User Group Six",
+            "email_id": "user_group_six@example.com",
+            "status": 0
+        },
+        {
+            "id": 7,
+            "name": "User Group Seven",
+            "email_id": "user_group_seven@example.com",
+            "status": 1
+        },
+        {
+            "id": 8,
+            "name": "User Group Eight",
+            "email_id": "user_group_eight@example.com",
+            "status": 0
+        },
+        {
+            "id": 9,
+            "name": "User Group Nine",
+            "email_id": "user_group_nine@example.com",
+            "status": 1
+        },
+        {
+            "id": 10,
+            "name": "User Group Ten",
+            "email_id": "user_group_ten@example.com",
+            "status": 0
+        }
+    ]
+}

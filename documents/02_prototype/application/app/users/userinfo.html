@@ -1,0 +1,79 @@
+<form name="userInfoForm" ng-submit="ctrl.submitUserInfo(userInfoForm.$valid)" novalidate="true">
+    <div class="row cell-auto-size padding10">
+        <div class="cell auto-size padding5">
+            <label>Username</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" name="username" ng-model="ctrl.userInfo.username" ng-required="true">
+                <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+            </div>
+            <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.username.$error.required">Please enter username.</div>
+            <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && !userInfoForm.username.$error.required && ctrl.user_existed">Username is already existed.</div>
+        </div>
+    </div>
+    <div class="row cell-auto-size padding10">
+        <div class="cell auto-size padding5">
+            <label>Email Id</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" name="email_id" ng-model="ctrl.userInfo.email_id" ng-required="true">
+                <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+            </div>
+            <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.email_id.$error.required">Please enter user email id.</div>
+            <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && !userInfoForm.email_id.$error.required && ctrl.user_existed">Email Id is already existed.</div>
+        </div>
+    </div>
+    <div class="row cell-auto-size padding10">
+        <div class="cell auto-size padding5">
+            <label>Full name</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" name="fullname" ng-model="ctrl.userInfo.fullname" ng-required="true">
+                <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+            </div>
+            <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.fullname.$error.required">Please enter user full name.</div>
+        </div>
+    </div>
+    <div class="row cell-auto-size padding10">
+        <div class="cell auto-size padding5">
+            <label>User Groups</label>
+            <div id="userinfo_usergroup" class="input-control select full-size" data-role="select">
+            </div>
+        </div>
+    </div>
+    <div class="row cell-auto-size padding10">
+        <div class="cell auto-size padding5">
+            <label>User Position</label>
+            <div class="input-control text full-size" data-role="input">
+                <input type="text" name="position" ng-model="ctrl.userInfo.position" ng-required="true">
+                <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+            </div>
+            <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.position.$error.required">Please enter user position.</div>
+        </div>
+    </div>
+    <div class="row cell-auto-size padding10">
+        <div class="cell auto-size padding5">
+            <label>Password</label>
+            <div class="input-control password full-size" data-role="input">
+                <input type="text" name="password" ng-model="ctrl.userInfo.password" ng-required="true">
+                <button type="button" class="button helper-button reveal"><span class="mif-looks"></span></button>
+            </div>
+            <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.password.$error.required">Please enter user password.</div>
+        </div>
+    </div>
+    <div class="row cell-auto-size padding10">
+        <div class="cell auto-size padding5">
+            <label class="switch">
+                <input type="checkbox" name="activate_account" ng-model="ctrl.userInfo.activate_account">
+                <span class="check"></span>
+                <span> Activate Account</span>
+            </label>
+        </div>
+    </div>
+    <div class="row cell-auto-size padding10">
+        <div class="form-actions padding5">
+            <button type="button" class="button primary" ng-click="ctrl.submitUserInfo(userInfoForm.$valid)">
+                <span ng-show="ctrl.user_btn_create">Create</span>
+                <span ng-show="!ctrl.user_btn_create">Update</span>
+            </button>
+            <button type="button" class="button link">Clear</button>
+        </div>
+    </div>
+</form>
