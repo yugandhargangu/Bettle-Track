@@ -1,4 +1,4 @@
-/* global AjaxHelper, baseUrl, tinyMCE */
+/* global AjaxHelper, baseUrl, tinyMCE, PreLoader */
 
 'use strict';
 
@@ -30,6 +30,10 @@ var Urls = {
     page: {
         method: 'GET',
         url: baseUrl + 'server/projects/page.json'
+    },
+    fields: {
+        method: 'GET',
+        url: baseUrl + 'server/projects/fields.json'
     }
 };
 
@@ -110,6 +114,23 @@ bettleTrackApp.factory('PageService', ['$resource', function ($resource) {
         });
     }]);
 
+bettleTrackApp.factory('FieldService', ['$resource', function ($resource) {
+        return $resource('/', {}, {
+            query: {
+                method: Urls.fields.method,
+                url: Urls.fields.url,
+                isArray: false,
+                transformResponse: AjaxHelper.generateResponse
+            },
+            get: {
+                method: Urls.fields.method,
+                url: Urls.fields.url,
+                isArray: false,
+                transformResponse: AjaxHelper.generateResponse
+            }
+        });
+    }]);
+
 bettleTrackApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/project/0');
         $stateProvider.state('project', {
@@ -136,6 +157,10 @@ bettleTrackApp.config(['$stateProvider', '$urlRouterProvider', function ($stateP
             url: '/files/:project_id',
             templateUrl: 'projects/files.html',
             controller: 'FilesController as ctrl'
+        }).state('project.fields', {
+            url: '/fields/:module_id',
+            templateUrl: 'projects/fields.html',
+            controller: 'FieldController as ctrl'
         });
     }]);
 
@@ -155,6 +180,7 @@ bettleTrackApp.run(function ($rootScope, $timeout) {
 // sidebar controller
 bettleTrackApp.controller('SidebarController', ['$rootScope', 'ProjectService', function ($rootScope, ProjectService) {
         var self = this;
+        $rootScope.activeMainMenuItem = 3;
         $rootScope.project_id = 0;
         self.projects = [];
         ProjectService.query(function (response) {
@@ -177,10 +203,12 @@ bettleTrackApp.controller('ProjectController', ['$rootScope', '$stateParams', '$
         if ($state.current.name === 'project') {
             $state.go('project.info', {project_id: $stateParams.project_id});
         }
+        PreLoader.init();
     }]);
 
 // project information controller
-bettleTrackApp.controller('ProjectInfoController', ['$stateParams', 'ProjectService', function ($stateParams, ProjectService) {
+bettleTrackApp.controller('ProjectInfoController', ['$rootScope', '$stateParams', 'ProjectService', function ($rootScope, $stateParams, ProjectService) {
+        $rootScope.activeProjectMenuItem = 1;
         var self = this;
         self.project = {};
         ProjectService.get({}, function (response) {
@@ -190,7 +218,8 @@ bettleTrackApp.controller('ProjectInfoController', ['$stateParams', 'ProjectServ
     }]);
 
 // module information controller
-bettleTrackApp.controller('ModuleInfoController', ['$stateParams', 'ModuleService', function ($stateParams, ModuleService) {
+bettleTrackApp.controller('ModuleInfoController', ['$rootScope', '$stateParams', 'ModuleService', function ($rootScope, $stateParams, ModuleService) {
+        $rootScope.activeProjectMenuItem = 2;
         var self = this;
         self.module = {};
         ModuleService.get({}, function (response) {
@@ -200,8 +229,9 @@ bettleTrackApp.controller('ModuleInfoController', ['$stateParams', 'ModuleServic
     }]);
 
 // members controller
-bettleTrackApp.controller('MembersController', ['$stateParams', 'MemberService',
-    function ($stateParams, MemberService) {
+bettleTrackApp.controller('MembersController', ['$rootScope', '$stateParams', 'MemberService',
+    function ($rootScope, $stateParams, MemberService) {
+        $rootScope.activeProjectMenuItem = 3;
         var self = this;
         self.project_name = '';
         self.all_users = [];
@@ -220,12 +250,14 @@ bettleTrackApp.controller('MembersController', ['$stateParams', 'MemberService',
     }]);
 
 // files controller
-bettleTrackApp.controller('FilesController', ['$stateParams', 'MemberService', function ($stateParams, MemberService) {
+bettleTrackApp.controller('FilesController', ['$rootScope', '$stateParams', 'MemberService', function ($rootScope, $stateParams, MemberService) {
+        $rootScope.activeProjectMenuItem = 4;
         var self = this;
     }]);
 
 // pages controller
-bettleTrackApp.controller('PagesController', ['$stateParams', 'PageService', function ($stateParams, PageService) {
+bettleTrackApp.controller('PagesController', ['$rootScope', '$stateParams', 'PageService', function ($rootScope, $stateParams, PageService) {
+        $rootScope.activeProjectMenuItem = 5;
         var self = this;
         self.pages = [];
         self.project_name = '';
@@ -253,6 +285,45 @@ bettleTrackApp.controller('PagesController', ['$stateParams', 'PageService', fun
                 self.page_content = response.data.page_content;
                 $('#page-info').data('dialog').open();
             });
+        };
+    }]);
+
+// fields controller
+bettleTrackApp.controller('FieldController', ['$rootScope', '$stateParams', 'FieldService',
+    function ($rootScope, $stateParams, FieldService) {
+        $rootScope.activeProjectMenuItem = 6;
+        var self = this;
+        self.project_name = '';
+        self.module_name = '';
+        self.all_field_types = [];
+        self.fields = [];
+        self.fieldInfo = {};
+        self.fieldInfoSubmitted = false;
+        self.field_existed = false;
+        self.user_btn_create = true;
+        FieldService.query({}, function (response) {
+            self.project_name = response.data.project_name;
+            self.fields = response.data.fields;
+            self.all_field_types = response.data.types;
+            if ($stateParams.module_id == 0) {
+                self.module_name = '';
+            } else {
+                self.module_name = 'Some Module Name';
+            }
+        });
+        self.addField = function () {
+            var dialog = $('#add_field').data('dialog');
+            dialog.open();
+        };
+        self.submitFieldForm = function (isValid) {
+            self.fieldInfoSubmitted = true;
+            if (isValid) {
+                // do submit
+            }
+        };
+        self.showFieldInfo = function (field_id) {
+            var dialog = $('#add_field').data('dialog');
+            dialog.open();
         };
     }]);
 

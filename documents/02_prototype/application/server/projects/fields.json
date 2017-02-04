@@ -1,0 +1,78 @@
+{
+    "project_id": 1,
+    "project_name": "Some project name",
+    "fields": [
+        {
+            "label": "Field Label 1",
+            "type": "Textbox",
+            "values": "",
+            "mandatory": true
+        }, {
+            "label": "Field Label 2",
+            "type": "Dropdown",
+            "values": ["Value1", "Value2", "Value3", "Value4"],
+            "mandatory": true
+        }, {
+            "label": "Field Label 3",
+            "type": "Textarea",
+            "values": "",
+            "mandatory": true
+        }, {
+            "label": "Field Label 4",
+            "type": "Multi Text",
+            "values": "",
+            "mandatory": true
+        }, {
+            "label": "Field Label 5",
+            "type": "Radio button",
+            "values": ["Value1", "Value2", "Value3", "Value4"],
+            "mandatory": true
+        }, {
+            "label": "Field Label 6",
+            "type": "Checkbox",
+            "values": ["Value1", "Value2", "Value3", "Value4"],
+            "mandatory": true
+        }, {
+            "label": "Field Label 7",
+            "type": "Checkbox",
+            "values": ["Value1", "Value2", "Value3", "Value4"],
+            "mandatory": false
+        }, {
+            "label": "Field Label 8",
+            "type": "Checkbox",
+            "values": ["Value1", "Value2", "Value3", "Value4"],
+            "mandatory": false
+        }, {
+            "label": "Field Label 9",
+            "type": "Checkbox",
+            "values": ["Value1", "Value2", "Value3", "Value4"],
+            "mandatory": false
+        }, {
+            "label": "Field Label 10",
+            "type": "Checkbox",
+            "values": ["Value1", "Value2", "Value3", "Value4"],
+            "mandatory": false
+        }
+    ],
+    "types": [
+        {
+            "id":1,
+            "message":"Textbox"
+        },{
+            "id":2,
+            "message":"Dropdown"
+        },{
+            "id":3,
+            "message":"Textarea"
+        },{
+            "id":4,
+            "message":"Multi Text"
+        },{
+            "id":5,
+            "message":"Radio button"
+        },{
+            "id":6,
+            "message":"Checkbox"
+        }
+    ]
+}

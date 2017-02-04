@@ -11,7 +11,8 @@
         <link rel="stylesheet" href="../public/css/app.css"/>
     </head>
     <body class="bg-steel" ng-app="bettleTrackApp">
-        <div class="app-bar fixed-top navy" ng-include="'appbar.html'">
+        <div data-role="preloader" data-type="cycle" data-style="color" id="data-preloader"></div>
+        <div class="app-bar fixed-top navy" ng-include="'appbar.html'" data-role="appbar">
         </div>
 
         <div class="page-content">

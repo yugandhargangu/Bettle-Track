@@ -20,3 +20,21 @@ IdHelper.generate = function () {
     this.id++;
     return this.name + this.id;
 };
+
+var PreLoader = {
+    preloader: $('#data-preloader')
+};
+
+PreLoader.init = function () {
+    if ($(this.preloader).is(':visible')) {
+        $(this.preloader).hide();
+    }
+};
+
+PreLoader.hide = function () {
+    $(this.preloader).hide();
+};
+
+PreLoader.show = function () {
+    $(this.preloader).show();
+};

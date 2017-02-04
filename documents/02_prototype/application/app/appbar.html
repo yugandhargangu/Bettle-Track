@@ -1,7 +1,7 @@
-<a href="index.html" class="app-bar-element branding">Bettle Track</a>
+<a href="index.html" class="app-bar-element branding"><h1>Bettle Track</h1></a>
 <span class="app-bar-divider"></span>
 <ul class="app-bar-menu">
-    <li>
+    <li ng-class="{true:'active', false:''}[activeMainMenuItem === 1]">
         <a href="" class="dropdown-toggle">Dashboard</a>
         <ul class="d-menu" data-role="dropdown">
             <li><a href="index.html">Create Dashboard</a></li>
@@ -19,7 +19,7 @@
             </li>
         </ul>
     </li>
-    <li>
+    <li ng-class="{true:'active', false:''}[activeMainMenuItem === 2]">
         <a href="" class="dropdown-toggle">Users</a>
         <ul class="d-menu" data-role="dropdown">
             <li><a href="users.html#!/users/0/userinfo/0">New User</a></li>
@@ -38,7 +38,7 @@
             </li>
         </ul>
     </li>
-    <li>
+    <li ng-class="{true:'active', false:''}[activeMainMenuItem === 3]">
         <a href="" class="dropdown-toggle">Projects</a>
         <ul class="d-menu" data-role="dropdown">
             <li><a href="projects.html">New project</a></li>
@@ -56,7 +56,7 @@
             </li>
         </ul>
     </li>
-    <li>
+    <li ng-class="{true:'active', false:''}[activeMainMenuItem === 4]">
         <a href="" class="dropdown-toggle"> Testing </a>
         <ul class="d-menu" data-role="dropdown">
             <li><a href="test_plan.html#!/project/1/testcase/0/details">Test Plan</a></li>
@@ -64,7 +64,7 @@
             <li><a href="test_lab.html#!/project/1/testset/0/details">Test Lab</a></li>
         </ul>
     </li>
-    <li>
+    <li ng-class="{true:'active', false:''}[activeMainMenuItem === 5]">
         <a href="" class="dropdown-toggle">Issues</a>
         <ul class="d-menu" data-role="dropdown">
             <li><a href="issues.html">New issue</a></li>
@@ -108,13 +108,62 @@
             <li><a href="issues.html#!/filter/f/0">Filter</a></li>
         </ul>
     </li>
+    <li>
+        <a href="" class="dropdown-toggle"><span class="mif-notification"></span></a>
+        <ul class="vertical-menu app-bar-drop-container notify-system bg-white fg-blue" data-role="dropdown">
+            <li>
+                <a href="issues.html#!/issue/0">
+                    <div class="notify-text">[DoraAnna] jp.kddilabs.smartnetwork.troubleshooting Application crash is occurring multiple times in JP market 1</div>
+                    <div>2017/03/27</div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="issues.html#!/issue/0">
+                    <div class="notify-text">[DoraAnna] jp.kddilabs.smartnetwork.troubleshooting Application crash is occurring multiple times in JP market 1</div>
+                    <div>2017/03/27</div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="issues.html#!/issue/0">
+                    <div class="notify-text">[DoraAnna] jp.kddilabs.smartnetwork.troubleshooting Application crash is occurring multiple times in JP market 1</div>
+                    <div>2017/03/27</div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="issues.html#!/issue/0">
+                    <div class="notify-text">[DoraAnna] jp.kddilabs.smartnetwork.troubleshooting Application crash is occurring multiple times in JP market 1</div>
+                    <div>2017/03/27</div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="issues.html#!/issue/0">
+                    <div class="notify-text">[DoraAnna] jp.kddilabs.smartnetwork.troubleshooting Application crash is occurring multiple times in JP market 1</div>
+                    <div>2017/03/27</div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="issues.html#!/issue/0">
+                    <div class="notify-text">[DoraAnna] jp.kddilabs.smartnetwork.troubleshooting Application crash is occurring multiple times in JP market 1</div>
+                    <div>2017/03/27</div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li class="bg-blue fg-white"><a href="notifications.html">show more <span class="mif-arrow-right"></span></a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="calendar.html" class="fg-white fg-hover-yellow"><span class="mif-calendar mif-2x"></span></a>
+    </li>
 </ul>
 <div class="app-bar-element place-right">
-    <span class="dropdown-toggle"><span class="mif-cog"></span> User Name</span>
-    <div class="app-bar-drop-container padding10 place-right no-margin-top block-shadow fg-dark" data-role="dropdown" data-no-close="true" style="width: 220px">
-        <ul class="unstyled-list">
-            <li><a href="profile.html" class="fg-white fg-hover-yellow">Profile</a></li>
-            <li><a href="../index.html" class="fg-white fg-hover-yellow">Logout</a></li>
-        </ul>
-    </div>
+    <span class="dropdown-toggle">User Name</span>
+    <ul class="d-menu place-right" data-role="dropdown">
+        <li><a href="profile.html" class="fg-white fg-hover-yellow">Profile</a></li>
+        <li><a href="../index.html" class="fg-white fg-hover-yellow">Logout</a></li>
+    </ul>
 </div>
