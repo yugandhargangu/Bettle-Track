@@ -1,4 +1,4 @@
-/* global baseUrl, AjaxHelper, SelectRender */
+/* global baseUrl, AjaxHelper, SelectRender, PreLoader */
 
 'use strict';
 
@@ -94,10 +94,12 @@ bettleTrackApp.run(function ($rootScope, $timeout) {
 bettleTrackApp.controller('SidebarController', ['$rootScope', 'UserGroupService',
     function ($rootScope, UserGroupService) {
         var self = this;
+        $rootScope.activeMainMenuItem = 2;
         $rootScope.userGroupId = -1;
         $rootScope.usergroups = [];
         UserGroupService.query(function (response) {
             $rootScope.usergroups = response.data.user_groups;
+            PreLoader.init();
         });
     }]);
 

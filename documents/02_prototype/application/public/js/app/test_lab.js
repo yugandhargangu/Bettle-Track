@@ -1,4 +1,4 @@
-/* global AjaxHelper, baseUrl, tinyMCE */
+/* global AjaxHelper, baseUrl, tinyMCE, PreLoader */
 
 'use strict';
 
@@ -80,6 +80,7 @@ bettleTrackApp.run(function ($rootScope, $timeout) {
 // sidebar controller
 bettleTrackApp.controller('SidebarController', ['$rootScope', 'ProjectService', function ($rootScope, ProjectService) {
         var self = this;
+        $rootScope.activeMainMenuItem = 4;
         $rootScope.project_id = 0;
         self.projects = [];
         ProjectService.query(function (response) {
@@ -98,6 +99,7 @@ bettleTrackApp.controller('TestSetsController', ['$rootScope', '$stateParams', '
         self.showAddFolder = function () {
 
         };
+        PreLoader.init();
     }]);
 
 // testcase info controller
@@ -109,6 +111,7 @@ bettleTrackApp.controller('TestInfoController', ['$rootScope', '$stateParams', '
 
 // testcase info controller
 bettleTrackApp.controller('DetailsController', ['$rootScope', 'ProjectService', function ($rootScope, ProjectService) {
+        $rootScope.testMenuItemIndex = 1;
         var self = this;
         CallBackHelper.add(function () {
             if (tinyMceInitCount > 0) {
@@ -143,18 +146,21 @@ bettleTrackApp.controller('DetailsController', ['$rootScope', 'ProjectService', 
 // design steps controller
 bettleTrackApp.controller('ExecutionController', ['$rootScope', '$stateParams', '$state', 'ProjectService',
     function ($rootScope, $stateparams, $state, ProjectService) {
+        $rootScope.testMenuItemIndex = 2;
         var self = this;
     }]);
 
 // attachments controller
 bettleTrackApp.controller('AttachmentsController', ['$rootScope', '$stateParams', '$state', 'ProjectService',
     function ($rootScope, $stateparams, $state, ProjectService) {
+        $rootScope.testMenuItemIndex = 3;
         var self = this;
     }]);
 
 // issues controller
 bettleTrackApp.controller('IssuesController', ['$rootScope', '$stateParams', '$state', 'ProjectService',
     function ($rootScope, $stateparams, $state, ProjectService) {
+        $rootScope.testMenuItemIndex = 4;
         var self = this;
         self.issues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     }]);
@@ -162,5 +168,6 @@ bettleTrackApp.controller('IssuesController', ['$rootScope', '$stateParams', '$s
 // history controller
 bettleTrackApp.controller('HistoryController', ['$rootScope', '$stateParams', '$state', 'ProjectService',
     function ($rootScope, $stateparams, $state, ProjectService) {
+        $rootScope.testMenuItemIndex = 5;
         var self = this;
     }]);

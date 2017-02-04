@@ -11,7 +11,8 @@
         <link rel="stylesheet" href="../public/css/app.css"/>
     </head>
     <body class="bg-steel" ng-app="bettleTrackApp">
-        <div class="app-bar fixed-top navy" ng-include src="'appbar.html'">
+        <div data-role="preloader" data-type="cycle" data-style="color" id="data-preloader"></div>
+        <div class="app-bar fixed-top navy" ng-include src="'appbar.html'" data-role="appbar">
         </div>
 
         <div class="page-content">
@@ -20,82 +21,56 @@
                     <div class="cell size-x200" id="cell-sidebar" style="background-color: #71b1d1; height: 100%">
                         <ul class="sidebar" ng-controller="SidebarController as ctrl">
                             <li ng-class="{true:'active',false:''}[sidebarCode == 'search']">
-                                <a ui-sref="filter">
-                                    <span class="title">Search</span>
-                                </a>
+                                <a ui-sref="filter">Search</a>
                             </li>
                             <li ng-class="{true:'active',false:''}[sidebarCode == 'new_issue']">
-                                <a ui-sref="issue({issue_id:0})">
-                                    <span class="title">New Issue</span>
-                                </a>
+                                <a ui-sref="issue({issue_id:0})">New Issue</a>
                             </li>
                             <li class="bg-steel fg-green">
-                                <a href=""><span class="title title-large">Issues by Projects</span></a>
+                                <a href=""><span class="title-large">Issues by Projects</span></a>
                             </li>
                             <li ng-repeat="project in ctrl.projects" ng-class="{true:'active',false:''}[sidebarCode == 'project' && sidebarId == project.id]">
-                                <a ui-sref="filter({type:'p', id:project.id})">
-                                    <span class="title">{{project.name}}</span>
-                                </a></li>
+                                <a ui-sref="filter({type:'p', id:project.id})">{{project.name}}</a>
+                            </li>
                             <li ng-class="{true:'active',false:''}[sidebarCode == 'project' && sidebarId == 0]">
-                                <a ui-sref="filter({type:'p', id:0})">
-                                    <span class="title">All Projects</span>
-                                </a>
+                                <a ui-sref="filter({type:'p', id:0})">All Projects</a>
                             </li>
                             <li class="bg-steel fg-green">
-                                <a href=""><span class="title title-large">Most Common</span></a>
+                                <a href=""><span class="title-large">Most Common</span></a>
                             </li>
                             <li ng-class="{true:'active',false:''}[sidebarCode == 'common' && sidebarId == 0]">
-                                <a ui-sref="filter({type:'c', id:0})">
-                                    <span class="title">Search for issues</span>
-                                </a>
+                                <a ui-sref="filter({type:'c', id:0})">Search for issues</a>
                             </li>
                             <li ng-class="{true:'active',false:''}[sidebarCode == 'common' && sidebarId == 1]">
-                                <a ui-sref="filter({type:'c',id:1})">
-                                    <span class="title">My open issues</span>
-                                </a>
+                                <a ui-sref="filter({type:'c',id:1})">My open issues</a>
                             </li>
                             <li ng-class="{true:'active',false:''}[sidebarCode == 'common' && sidebarId == 2]">
-                                <a ui-sref="filter({type:'c',id:2})">
-                                    <span class="title">Reported by me</span>
-                                </a>
+                                <a ui-sref="filter({type:'c',id:2})">Reported by me</a>
                             </li>
                             <li ng-class="{true:'active',false:''}[sidebarCode == 'common' && sidebarId == 3]">
-                                <a ui-sref="filter({type:'c',   id:3})">
-                                    <span class="title">Open issues</span>
-                                </a>
+                                <a ui-sref="filter({type:'c',   id:3})">Open issues</a>
                             </li>
                             <li ng-class="{true:'active',false:''}[sidebarCode == 'common' && sidebarId == 4]">
-                                <a ui-sref="filter({type:'c',id:4})">
-                                    <span class="title">Recently viewed</span>
-                                </a>
+                                <a ui-sref="filter({type:'c',id:4})">Recently viewed</a>
                             </li>
                             <li ng-class="{true:'active',false:''}[sidebarCode == 'common' && sidebarId == 5]">
-                                <a ui-sref="filter({type:'c',id:5})">
-                                    <span class="title">Recently added</span>
-                                </a>
+                                <a ui-sref="filter({type:'c',id:5})">Recently added</a>
                             </li>
                             <li ng-class="{true:'active',false:''}[sidebarCode == 'common' && sidebarId == 6]">
-                                <a ui-sref="filter({type:'c',id:6})">
-                                    <span class="title">Recently resolved</span>
+                                <a ui-sref="filter({type:'c',id:6})">Recently resolved
                                 </a>
                             </li>
                             <li class="bg-steel fg-green">
-                                <a href=""><span class="title title-large">Filters</span></a>
+                                <a href=""><span class="title-large">Filters</span></a>
                             </li>
                             <li ng-class="{true:'active',false:''}[sidebarCode == 'filter' && sidebarId == 0]">
-                                <a ui-sref="filter({type:'f',id:0})">
-                                    <span class="title">New Filter</span>
-                                </a>
+                                <a ui-sref="filter({type:'f',id:0})">New Filter</a>
                             </li>
                             <li ng-repeat="filter in ctrl.filters" ng-class="{true:'active',false:''}[sidebarCode == 'filter' && sidebarId == filter.id]">
-                                <a ui-sref="filter({type:'f',id:filter.id})">
-                                    <span class="title">{{filter.name}}</span>
-                                </a>
+                                <a ui-sref="filter({type:'f',id:filter.id})">{{filter.name}}</a>
                             </li>
                             <li ng-class="{true:'active',false:''}[sidebarCode == 'all_filter']">
-                                <a ui-sref="filters">
-                                    <span class="title">All Filters</span>
-                                </a>
+                                <a ui-sref="filters">All Filters</a>
                             </li>
                         </ul>
                     </div>

@@ -1,0 +1,118 @@
+<div>
+    <ul class="breadcrumbs2">
+        <li><a href=""><span class="icon mif-home"></span></a></li>
+        <li><a href="">Projects</a></li>
+        <li><a href="">{{ctrl.project_name}}</a></li>
+        <li><a href="">Fields</a></li>
+        <li ng-show="ctrl.module_name !== ''"><a href="">Module</a></li>
+        <li ng-show="ctrl.module_name !== ''"><a href="">{{ctrl.module_name}}</a></li>
+    </ul>
+    <div>
+        <hr class="thin bg-grayLighter">
+        <button type="button" class="button primary" ng-click="ctrl.addField()"><span class="mif-plus"></span> Add</button>
+        <button type="button" class="button alert"><span class="mif-bin"></span> Remove</button>
+        <hr class="thin bg-grayLighter">
+        <div class="dataTables_length">
+            <div>
+                <label>Show 
+                    <select>
+                        <option value="10">10</option>
+                        <option value="10">20</option>
+                        <option value="10">50</option>
+                        <option value="10">100</option>
+                        <option value="10">200</option>
+                        <option value="10">500</option>
+                    </select>
+                    fields per page</label>
+            </div>
+        </div>
+        <table class="table striped hovered cell-auto-size border bordered">
+            <thead>
+                <tr>
+                    <th>Field Label</th>
+                    <th>Field Type</th>
+                    <th>Values</th>
+                    <th>Is Mandatory</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="field in ctrl.fields">
+                    <td>{{field.label}}</td>
+                    <td>{{field.type}}</td>
+                    <td>{{field.values}}</td>
+                    <td>
+                        <span ng-show="field.mandatory">Yes</span>
+                        <span ng-show="!field.mandatory">No</span>
+                    </td>
+                    <td class="align-center">
+                        <button type="button" class="button primary small-button" ng-click="ctrl.showFieldInfo(field.id)"><span class="mif-pencil"></span> Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="dataTables_paginate">
+            <button type="button" class="paginate_button current">Previous</button>
+            <button type="button" class="paginate_button current">Next</button>
+        </div>
+        <div class="dataTables_info">Page 1: showing 1 to 10 of 57 entries</div>
+    </div>
+    <div id="add_field" class="window window-top" data-role="dialog" data-overlay="true" data-overlay-color="modal-overlay" data-close-button="true">
+        <div class="window-caption padding10">
+            <span class="window-caption-title">Add New Field</span>
+        </div>
+        <div class="window-content padding20">
+            <form name="fieldInfoForm" ng-submit="ctrl.submitFieldForm(fieldInfoForm.$valid)" novalidate="true">
+                <div class="row cell-auto-size padding10">
+                    <div class="cell auto-size padding5">
+                        <label>Field label</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" name="field_label" ng-model="ctrl.fieldInfo.field_label" ng-required="true">
+                            <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+                        </div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.fieldInfoSubmitted && fieldInfoForm.field_label.$error.required">Please enter field label.</div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.fieldInfoSubmitted && !fieldInfoForm.field_label.$error.required && ctrl.field_existed">Field label is already existed.</div>
+                    </div>
+                </div>
+                <div class="row cell-auto-size padding10">
+                    <div class="cell auto-size padding5">
+                        <label>Field Type</label>
+                        <div id="fieldInfo_fieldTypes" class="input-control select full-size" data-role="select"> 
+                            <select name="field_type" ng-model="ctrl.fieldInfo.field_type" ng-init="ctrl.fieldInfo.field_type = 1" 
+                                    ng-options="field_type.id as field_type.message for field_type in ctrl.all_field_types">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row cell-auto-size padding10">
+                    <div class="cell auto-size padding5">
+                        <label>Field Values</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" name="values" ng-model="ctrl.fieldInfo.values" ng-required="true">
+                            <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+                        </div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.fieldInfoSubmitted && fieldInfoForm.values.$error.required">Please enter field values.</div>
+                    </div>
+                </div>
+                <div class="row cell-auto-size padding10">
+                    <div class="cell auto-size padding5">
+                        <label class="switch">
+                            <input type="checkbox" name="is_mandatory" ng-model="ctrl.fieldInfo.is_mandatory">
+                            <span class="check"></span>
+                            <span> Is Mandatory</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row cell-auto-size padding10">
+                    <div class="form-actions padding5">
+                        <button type="button" class="button primary" ng-click="ctrl.submitFieldForm(fieldInfoForm.$valid)">
+                            <span ng-show="ctrl.user_btn_create">Create</span>
+                            <span ng-show="!ctrl.user_btn_create">Update</span>
+                        </button>
+                        <button type="button" class="button link">Clear</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

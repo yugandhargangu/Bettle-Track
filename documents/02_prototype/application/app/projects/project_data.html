@@ -2,10 +2,10 @@
     <div class="heading" style="width: 100%;">
         <span class="title">{{ctrl.project_name}}</span>
     </div>
-    <div class="app-bar">
+    <div class="app-bar" style="border: 1px solid #0072c6;border-bottom-color: #FFFFFF;">
         <ul class="app-bar-menu">
-            <li><a ui-sref="project.info{project_id:0}">Project Information</a></li>
-            <li>
+            <li ng-class="{true:'active',false:''}[activeProjectMenuItem === 1]"><a ui-sref="project.info({project_id:0})">Project Information</a></li>
+            <li ng-class="{true:'active',false:''}[activeProjectMenuItem === 2]">
                 <a href="" class="dropdown-toggle">Modules</a>
                 <ul class="d-menu" data-role="dropdown">
                     <li><a ui-sref="project.module({module_id: 0})">Add New Module</a></li>
@@ -20,9 +20,24 @@
                     </li>
                 </ul>
             </li>
-            <li><a ui-sref="project.members({project_id:ctrl.project_id})">Members</a></li>
-            <li><a ui-sref="project.files({project_id:0})" >Files</a></li>
-            <li><a ui-sref="project.pages({project_id:0})">Pages</a></li>
+            <li ng-class="{true:'active',false:''}[activeProjectMenuItem === 3]"><a ui-sref="project.members({project_id:ctrl.project_id})">Members</a></li>
+            <li ng-class="{true:'active',false:''}[activeProjectMenuItem === 4]"><a ui-sref="project.files({project_id:0})" >Files</a></li>
+            <li ng-class="{true:'active',false:''}[activeProjectMenuItem === 5]"><a ui-sref="project.pages({project_id:0})">Pages</a></li>
+            <li ng-class="{true:'active',false:''}[activeProjectMenuItem === 6]">
+                <a href="" class="dropdown-toggle">Custom Fields</a>
+                <ul class="d-menu" data-role="dropdown">
+                    <li><a ui-sref="project.fields({module_id: 0})">Project Fields</a></li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="" class="dropdown-toggle">Modules</a>
+                        <ul class="d-menu" data-role="dropdown">
+                            <li ng-repeat="module_info in ctrl.modules">
+                                <a ui-sref="project.fields({module_id:module_info.id})">{{module_info.name}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
     <div class="bg-white" ui-view="">

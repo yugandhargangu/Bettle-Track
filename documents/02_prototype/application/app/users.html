@@ -11,25 +11,26 @@
         <link rel="stylesheet" href="../public/css/app.css"/>
     </head>
     <body class="bg-steel" ng-app="bettleTrackApp">
-        <div class="app-bar fixed-top navy" ng-include="'appbar.html'">
+        <div data-role="preloader" data-type="cycle" data-style="color" id="data-preloader"></div>
+        <div class="app-bar fixed-top navy" ng-include="'appbar.html'" data-role="appbar">
         </div>
 
         <div class="page-content">
-            <div class="flex-grid no-responsive-future" style="height: 100%;">
+            <div class="flex-grid" style="height: 100%;">
                 <div class="row" style="height: 100%;max-height: 100%;" ng-controller="SidebarController as ctrl">
-                    <div class="cell size-x200" id="cell-sidebar" style="background-color: #71b1d1; height: 100%">
+                    <div class="cell size-x200" id="cell-sidebar">
                         <ul class="sidebar">
                             <li ng-class="{true:'active', false:''}[userGroupId === -1]"><a ui-sref="usergroups">
-                                    <span class="title">All User Groups</span>
+                                    All User Groups
                                 </a>
                             </li>
                             <li ng-class="{true:'active', false:''}[userGroupId == 0]">
                                 <a ui-sref="users({group_id:0})">
-                                    <span class="title">All Users</span>
+                                    All Users
                                 </a>
                             </li>
                             <li ng-repeat="usergroup in usergroups"  ng-class="{true:'active', false:''}[userGroupId == usergroup.id]">
-                                <a ui-sref="users({group_id:usergroup.id})"><span class="title">{{usergroup.name}}</span></a>
+                                <a ui-sref="users({group_id:usergroup.id})">{{usergroup.name}}</a>
                             </li>
                         </ul>
                     </div>

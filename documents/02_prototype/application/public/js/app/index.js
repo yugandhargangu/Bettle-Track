@@ -1,4 +1,4 @@
-/* global AjaxHelper, baseUrl, DashBoardView, DashboardInfo */
+/* global AjaxHelper, baseUrl, DashBoardView, DashboardInfo, PreLoader */
 
 'use strict';
 
@@ -56,8 +56,9 @@ bettleTrackApp.service('CtrlService', function () {
     };
 });
 
-bettleTrackApp.controller('DashboardController', ['$scope', 'DashboardService', 'CtrlService',
-    function ($scope, DashboardService, CtrlService) {
+bettleTrackApp.controller('DashboardController', ['$rootScope', '$scope', 'DashboardService', 'CtrlService',
+    function ($rootScope, $scope, DashboardService, CtrlService) {
+        $rootScope.activeMainMenuItem = 1;
         var self = this;
         CtrlService.setCtrl('view', self);
         self.dashboards = [];
@@ -67,6 +68,7 @@ bettleTrackApp.controller('DashboardController', ['$scope', 'DashboardService', 
             DashboardService.query(function (response) {
                 self.dashboards = response.data.dashbaords;
                 self.loadDashboard(self.dashboards[0]);
+                PreLoader.init();
             });
         };
         self.loadDashboard = function (dashboard) {
@@ -100,7 +102,7 @@ bettleTrackApp.controller('DashboardController', ['$scope', 'DashboardService', 
 bettleTrackApp.controller('DashboardInfoController', ['$scope', 'DashboardInfoService', 'CtrlService',
     function ($scope, DashboardInfoService, CtrlService) {
         var self = this;
-        var self = this;
+        $('#dashboard-content').empty();
         CtrlService.setCtrl('info', self);
         self.defaultTitle = 'Dashboard New Title';
         self.onTitleBlur = function (event) {
@@ -110,7 +112,8 @@ bettleTrackApp.controller('DashboardInfoController', ['$scope', 'DashboardInfoSe
             }
         };
         self.addSection1 = function () {
-            alert('add section1');
+            var div = $('<div class="row cell-auto-size" style="width:90%:height:400px;border:1px solid gray;min-height:400px;">Test</div>');
+            $(div).appendTo($('#dashboard-content'));
         };
         self.addSection2 = function () {
             alert('add section2');

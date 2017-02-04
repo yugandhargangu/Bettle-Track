@@ -34,7 +34,10 @@ html{
 }
 
 .sidebar li a {
-    padding: .625rem 1rem .625rem 1rem;
+    padding: .425rem 1rem .425rem 1rem;
+    font-size: .6875rem;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .sidebar li a .title-large{
@@ -181,12 +184,50 @@ html{
     background-color: white;
 }
 
+#calendar{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.notify-system{
+    border: 1px solid #0072c6;
+    min-width: 220px;
+    width:400px;
+}
+
+.notify-system li a{
+    font-size: .875rem;
+}
+.notify-text{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#cell-sidebar{
+    background-color: #71b1d1;
+    height: 100%;
+    overflow-y: auto;
+}
+
 @media screen and (max-width: 800px){
-    #cell-sidebar {
-        flex-basis: 52px;
+    #calendar{
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
     }
-    #cell-content {
-        flex-basis: calc(100% - 52px);
+
+    #cell-sidebar{
+        height: 100px;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .sidebar li > a{
+        width: 100% !important;
     }
 }
 

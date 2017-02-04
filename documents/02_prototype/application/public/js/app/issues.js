@@ -1,4 +1,4 @@
-/* global AjaxHelper, baseUrl, tinyMCE */
+/* global AjaxHelper, baseUrl, tinyMCE, PreLoader */
 
 'use strict';
 
@@ -61,6 +61,7 @@ bettleTrackApp.service('SearchService', function () {
 // sidebar controller
 bettleTrackApp.controller('SidebarController', ['$rootScope', '$scope', 'SidebarService', function ($rootScope, $scope, SidebarService) {
         var self = this;
+        $rootScope.activeMainMenuItem = 5;
         $rootScope.sidebarCode = '';
         $rootScope.sidebarId = 0;
         $rootScope.detail_view = false;
@@ -144,6 +145,7 @@ bettleTrackApp.controller('FilterController', ['$rootScope', '$stateParams', '$s
         } else {
             $state.go('filter.listview', {}, {});
         }
+        PreLoader.init();
     }]);
 
 bettleTrackApp.controller('IssueInfoController', ['$rootScope', '$stateParams', '$state', 'SearchService',
@@ -190,6 +192,7 @@ bettleTrackApp.controller('IssueInfoController', ['$rootScope', '$stateParams', 
                 toolbar: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table'
             });
         });
+        PreLoader.init();
     }]);
 
 bettleTrackApp.controller('FiltersController', ['$rootScope', '$stateParams', '$state', 'FilterService',
@@ -237,6 +240,7 @@ bettleTrackApp.controller('FiltersController', ['$rootScope', '$stateParams', '$
             });
             $('#filter-edit-window').data('dialog').open();
         };
+        PreLoader.init();
     }]);
 
 bettleTrackApp.controller('ViewTypeController', ['$rootScope', '$stateParams', '$state', 'SearchService',
