@@ -1,68 +1,58 @@
-<h1 class="text-light"><span class="mif-users"> User Groups</span></h1>
-<hr class="thin bg-grayLighter">
-<button type="button" class="button primary" ng-click="ctrl.showUserGroupInfo(0)" ng-show="ctrl.buttons.add"><span class="mif-plus"></span> Create Group</button>
-<button type="button" class="button success"><span class="mif-checkmark" ng-show="ctrl.buttons.active"></span> Active</button>
-<button type="button" class="button warning"><span class="mif-blocked" ng-show="ctrl.buttons.block"></span> Block</button>
-<button type="button" class="button alert"><span class="mif-bin" ng-show="ctrl.buttons.delete"></span> Delete</button>
-<hr class="thin bg-grayLighter">
-<div>
-    <div class="dataTables_length">
-        <div>
-            <label>Show 
-                <select>
-                    <option value="10">10</option>
-                    <option value="10">20</option>
-                    <option value="10">50</option>
-                    <option value="10">100</option>
-                    <option value="10">200</option>
-                    <option value="10">500</option>
-                </select>
-                rows per page</label>
+<div class="flex-grid no-responsive-future" style="height: 100%;">
+    <div class="row" style="height: 100%;">
+        <div class="cell auto-size bg-white padding10">
+            <h1 class="text-light">
+                <span class="mif-users"> User Groups</span>
+                <button type="button" class="button primary place-right" ng-click="ctrl.showUserGroupInfo(0)" ng-show="ctrl.buttons.add"><span class="mif-plus"></span> Create Group</button>
+            </h1>
+            <hr class="thin bg-grayLighter">
+            <form name="userGroupInfoForm" ng-submit="ctrl.submitUserGroupInfo(userGroupInfoForm.$valid)" id="user-group-form" style="display: none;"  novalidate="true">
+                <div class="form-layout border-lightGray padding10">
+                    <div class="close-btn place-right" style="position: relative;" ng-click="ctrl.hideUserGroupInfo()">&times;</div>
+                    <h3>User Group Information</h3>
+                    <div class="form-item">
+                        <label>Email Id</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" name="email_id" ng-model="ctrl.userGroupInfo.email_id" ng-required="true">
+                            <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+                        </div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userGroupInfoSubmitted && userGroupInfoForm.email_id.$error.required">Please enter user group email id.</div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userGroupInfoSubmitted && !userGroupInfoForm.email_id.$error.required && ctrl.user_existed">Email Id is already existed.</div>
+                    </div>
+                    <div class="form-item">
+                        <label>Group name</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" name="fullname" ng-model="ctrl.userGroupInfo.fullname" ng-required="true">
+                            <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+                        </div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userGroupInfoSubmitted && userGroupInfoForm.fullname.$error.required">Please enter group name.</div>
+                    </div>
+                    <div class="form-item">
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <label class="switch">
+                            <input type="checkbox" name="activate_account" ng-model="ctrl.userGroupInfo.activate_account">
+                            <span class="check"></span>
+                            <span> Activate User Group</span>
+                        </label>
+                    </div>
+                    <div class="form-item">
+                        <button type="button" class="button primary" ng-click="ctrl.submitUserGroupInfo(userGroupInfoForm.$valid)">
+                            <span ng-show="ctrl.user_btn_create">Create</span>
+                            <span ng-show="!ctrl.user_btn_create">Update</span>
+                        </button>
+                        <button type="button" class="button link">Clear</button>
+                    </div>
+                </div>
+            </form>
+            <div class="input-control modern text" id="user-group-search" style="width: 90%;margin-left: 5%;" data-role="text">
+                <input type="text">
+                <span class="label">Search User Groups</span>                
+                <span class="placeholder">Search User Groups</span>
+            </div>
+            <div class="card-layout card-layout-inline-scroll" id="user-groups-list">
+                <!-- User group list will render here -->
+            </div>
         </div>
-    </div>
-    <table class="table striped hovered cell-auto-size border bordered">
-        <thead>
-            <tr>
-                <th>S.No</th>
-                <th>User Group</th>
-                <th>User Group Email id</th>
-                <th>Status</th>
-                <th>Active/Block</th>
-                <th ng-show="ctrl.buttons.action">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="usergroup in ctrl.usergroups">
-                <td>{{usergroup.id}}</td>
-                <td>{{usergroup.name}}</td>
-                <td>{{usergroup.email_id}}</td>
-                <td class="align-center">
-                    <span class="mif-checkmark fg-green" ng-show="usergroup.status === 1"> Active</span>
-                    <span class="mif-blocked fg-red" ng-show="usergroup.status === 0"> Blocked</span></td>
-                <td class="align-center">
-                    <label class="switch">
-                        <input type="checkbox" ng-checked="usergroup.status === 1">
-                        <span class="check"></span>
-                    </label>
-                </td>
-                <td class="align-center" ng-show="ctrl.buttons.action">
-                    <button type="button" class="button info mini-button" ng-click="ctrl.showUserGroupInfo(usergroup.id)"><span class="mif-bin"></span> Edit</button>
-                    <button type="button" class="button info mini-button" ng-click="ctrl.showGroupUsers(usergroup.id)"><span class="mif-bin"></span> Show users</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="dataTables_paginate">
-        <button type="button" class="paginate_button current">Previous</button>
-        <button type="button" class="paginate_button current">Next</button>
-    </div>
-    <div class="dataTables_info">Page 1: showing 1 to 10 of 57 entries</div>
-</div>
-<div class="window window-top" id="user-group-info" data-role="dialog" data-overlay="true" data-overlay-color="modal-overlay" data-close-button="true">
-    <div class="window-caption padding10">
-        <span class="window-caption-title">User Group Information</span>
-    </div>
-    <div class="window-content padding20" ui-view="">
-
     </div>
 </div>

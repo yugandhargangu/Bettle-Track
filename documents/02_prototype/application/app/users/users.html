@@ -1,81 +1,91 @@
-<h1 class="text-light"><span class="mif-users"> Users <span ng-show="ctrl.isUserGroupUsers">({{ctrl.userGroupName}})</span></span></h1>
-<hr class="thin bg-grayLighter">
-<button type="button" class="button primary" ng-click="ctrl.showUserInfo(0)" ng-show="ctrl.buttons.add"><span class="mif-plus"></span> Create...</button>
-<button type="button" class="button success"><span class="mif-checkmark" ng-show="ctrl.buttons.active"></span> Active</button>
-<button type="button" class="button warning"><span class="mif-blocked" ng-show="ctrl.buttons.block"></span> Block</button>
-<button type="button" class="button alert"><span class="mif-bin" ng-show="ctrl.buttons.delete"></span> Delete</button>
-<hr class="thin bg-grayLighter">
-<div>
-    <div class="dataTables_length">
-        <div>
-            <label>Show 
-                <select>
-                    <option value="10">10</option>
-                    <option value="10">20</option>
-                    <option value="10">50</option>
-                    <option value="10">100</option>
-                    <option value="10">200</option>
-                    <option value="10">500</option>
-                </select>
-                users per page</label>
-        </div>
-    </div>
-    <table class="table striped hovered cell-auto-size border bordered">
-        <thead>
-            <tr>
-                <th style="text-align: center;">
-                    <label class="input-control checkbox small-check">
-                        <input type="checkbox" checked>
-                        <span class="check"></span>
-                    </label>
-                </th>
-                <th>User Id</th>
-                <th>Full name</th>
-                <th>Email Id</th>
-                <th>User Role</th>
-                <th>Status</th>
-                <th>Active/Block</th>
-                <th ng-show="ctrl.buttons.action">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="user in ctrl.users">
-                <td style="text-align: center;">                    
-                    <label class="input-control checkbox small-check">
-                        <input type="checkbox" checked>
-                        <span class="check"></span>
-                    </label></td>
-                <td>{{user.username}}</td>
-                <td>{{user.fullname}}</td>
-                <td>{{user.email_id}}</td>
-                <td>{{user.role}}</td>
-                <td class="align-center">
-                    <span class="mif-checkmark fg-green" ng-show="user.status === 1"> Active</span>
-                    <span class="mif-blocked fg-red" ng-show="user.status === 0"> Blocked</span></td>
-                <td class="align-center">
-                    <label class="switch">
-                        <input type="checkbox" ng-checked="user.status === 1">
-                        <span class="check"></span>
-                    </label>
-                </td>
-                <td class="align-center" ng-show="ctrl.buttons.action">
-                    <button type="button" class="button primary small-button" ng-click="ctrl.showUserInfo(user.id)"><span class="mif-pencil"></span> Edit</button>
-                    <button type="button" class="button primary small-button" ng-click="ctrl.showuserGroups(user.id)"><span class="mif-eye"></span> View Groups</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="dataTables_paginate">
-        <button type="button" class="paginate_button current">Previous</button>
-        <button type="button" class="paginate_button current">Next</button>
-    </div>
-    <div class="dataTables_info">Page 1: showing 1 to 10 of 57 entries</div>
-</div>
-<div class="window window-top" id="user-info" data-role="dialog" data-overlay="true" data-overlay-color="modal-overlay" data-close-button="true">
-    <div class="window-caption padding10">
-        <span class="window-caption-title">User Information</span>
-    </div>
-    <div class="window-content padding20" ui-view="">
+<div class="flex-grid no-responsive-future" style="height: 100%;">
+    <div class="row" style="height: 100%;">
+        <div class="cell auto-size bg-white padding10">
+            <h1 class="text-light">
+                <span class="mif-users"> Users <span ng-show="ctrl.isUserGroupUsers">({{ctrl.userGroupName}})</span></span>
+                <button type="button" class="button primary bg-default place-right" ng-click="ctrl.showUserInfo(0)" ng-show="ctrl.buttons.add"><span class="mif-plus"></span> Create User</button>
+            </h1>
+            <hr class="thin bg-grayLighter">
+            <form name="userInfoForm" ng-submit="ctrl.submitUserInfo(userInfoForm.$valid)" style="display: none;" id="user-info-form" novalidate="true">
+                <div class="form-layout border-lightGray padding10">
+                    <div class="close-btn place-right" style="position: relative;" ng-click="ctrl.hideUserInfo()">&times;</div>
+                    <h3>User Information</h3>
+                    <div class="form-item">
+                        <label>Username</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" name="username" ng-model="ctrl.userInfo.username" ng-required="true">
+                            <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+                        </div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.username.$error.required">Please enter username.</div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && !userInfoForm.username.$error.required && ctrl.user_existed">Username is already existed.</div>
+                    </div>
+                    <div class="form-item">
+                        <label>Email Id</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" name="email_id" ng-model="ctrl.userInfo.email_id" ng-required="true">
+                            <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+                        </div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.email_id.$error.required">Please enter user email id.</div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && !userInfoForm.email_id.$error.required && ctrl.user_existed">Email Id is already existed.</div>
+                    </div>
+                    <div class="form-item">
+                        <label>Full name</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" name="fullname" ng-model="ctrl.userInfo.fullname" ng-required="true">
+                            <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+                        </div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.fullname.$error.required">Please enter user full name.</div>
+                    </div>
+                    <div class="form-item">
+                        <label>User Groups</label>
+                        <div id="userinfo_usergroup" class="input-control select height-auto full-size" data-role="select">
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label>User Position</label>
+                        <div class="input-control text full-size" data-role="input">
+                            <input type="text" name="position" ng-model="ctrl.userInfo.position" ng-required="true">
+                            <button type="button" class="button helper-button clear"><span class="mif-cross"></span></button>
+                        </div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.position.$error.required">Please enter user position.</div>
+                    </div>
+                    <div class="form-item">
+                        <label>Password</label>
+                        <div class="input-control password full-size" data-role="input">
+                            <input type="text" name="password" ng-model="ctrl.userInfo.password" ng-required="true">
+                            <button type="button" class="button helper-button reveal"><span class="mif-looks"></span></button>
+                        </div>
+                        <div class="line validator-hint bg-red fg-white hint2" ng-show="ctrl.userInfoSubmitted && userInfoForm.password.$error.required">Please enter user password.</div>
+                    </div>
+                    <div class="form-item">
+                        <div>&nbsp;</div>
+                        <div>&nbsp;</div>
+                        <label class="switch">
+                            <input type="checkbox" name="activate_account" ng-model="ctrl.userInfo.activate_account">
+                            <span class="check"></span>
+                            <span> Activate Account</span>
+                        </label>
+                    </div>
+                    <div class="form-item">
+                        <div class="form-actions padding5">
+                            <button type="button" class="button primary" ng-click="ctrl.submitUserInfo(userInfoForm.$valid)">
+                                <span ng-show="ctrl.user_btn_create">Create</span>
+                                <span ng-show="!ctrl.user_btn_create">Update</span>
+                            </button>
+                            <button type="button" class="button link">Clear</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
 
+            <div class="input-control modern text" id="users-search" style="width: 90%;margin-left: 5%;" data-role="text">
+                <input type="text">
+                <span class="label">Search Users</span>                
+                <span class="placeholder">Search users</span>
+            </div>
+            <div class="card-layout card-layout-inline-scroll" id="users-list">
+                <!-- User List will be rendered here -->
+            </div>
+        </div>
     </div>
 </div>

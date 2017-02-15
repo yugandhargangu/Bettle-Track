@@ -1,9 +1,8 @@
-/* global AjaxHelper, baseUrl, DashBoardView, DashboardInfo */
+/* global AjaxHelper, baseUrl, DashBoardView, DashboardInfo, PreLoader, CallBackHelper, bettleTrackApp */
 
 'use strict';
 
-var bettleTrackApp = angular.module('bettleTrackApp', ['ngResource']);
-
-bettleTrackApp.controller("SidebarController", function () {
-    PreLoader.init();
-});
+bettleTrackApp.controller("ProfileController", ['$rootScope', function ($rootScope) {
+        PreLoader.init();
+        $rootScope.activeMainMenuItem = 0;
+    }]);

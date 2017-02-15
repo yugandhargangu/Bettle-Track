@@ -1,8 +1,8 @@
-/* global AjaxHelper, baseUrl, DashBoardView, DashboardInfo, PreLoader */
+/* global AjaxHelper, baseUrl, DashBoardView, DashboardInfo, PreLoader, bettleTrackApp, CallBackHelper */
 
 'use strict';
 
-var Urls = {
+var DashboardUrls = {
     dashboards: {
         method: 'GET',
         url: baseUrl + 'server/dashboard/index.json'
@@ -13,19 +13,17 @@ var Urls = {
     }
 };
 
-var bettleTrackApp = angular.module('bettleTrackApp', ['ngResource']);
-
 bettleTrackApp.factory('DashboardService', function ($resource) {
     return $resource('/', {}, {
         query: {
-            method: Urls.dashboards.method,
-            url: Urls.dashboards.url,
+            method: DashboardUrls.dashboards.method,
+            url: DashboardUrls.dashboards.url,
             isArray: false,
             transformResponse: AjaxHelper.generateResponse
         },
         get: {
-            method: Urls.dashboard.method,
-            url: Urls.dashboard.url,
+            method: DashboardUrls.dashboard.method,
+            url: DashboardUrls.dashboard.url,
             isArray: false,
             transformResponse: AjaxHelper.generateResponse
         }
@@ -35,8 +33,8 @@ bettleTrackApp.factory('DashboardService', function ($resource) {
 bettleTrackApp.factory('DashboardInfoService', function ($resource) {
     return $resource('/', {}, {
         get: {
-            method: Urls.dashboard.method,
-            url: Urls.dashboard.url,
+            method: DashboardUrls.dashboard.method,
+            url: DashboardUrls.dashboard.url,
             isArray: false,
             transformResponse: AjaxHelper.generateResponse
         }
@@ -56,8 +54,8 @@ bettleTrackApp.service('CtrlService', function () {
     };
 });
 
-bettleTrackApp.controller('DashboardController', ['$rootScope', '$scope', 'DashboardService', 'CtrlService',
-    function ($rootScope, $scope, DashboardService, CtrlService) {
+bettleTrackApp.controller('DashboardController', ['$rootScope', '$scope', '$state', 'DashboardService', 'CtrlService',
+    function ($rootScope, $scope, $state, DashboardService, CtrlService) {
         $rootScope.activeMainMenuItem = 1;
         var self = this;
         CtrlService.setCtrl('view', self);
@@ -77,21 +75,8 @@ bettleTrackApp.controller('DashboardController', ['$rootScope', '$scope', 'Dashb
                 DashBoardView.render(response.data);
             });
         };
-        self.createDashboard = function () {
-            var infoData = {
-                ctrl: CtrlService.getCtrl('info'),
-                data: {}
-            };
-            DashboardInfo.render(infoData);
-            $('#dashboard-info').data('dialog').open();
-        };
         self.editDashboard = function () {
-            var infoData = {
-                ctrl: CtrlService.getCtrl('info'),
-                data: {}
-            };
-            DashboardInfo.render(infoData);
-            $('#dashboard-info').data('dialog').open();
+            $state.go('dashboard_info', {dashboard_id: 1}, {});
         };
         self.deleteDashboard = function () {
             confirm('Are you sure? Deleted dashboard can not be recovered!');
@@ -99,10 +84,20 @@ bettleTrackApp.controller('DashboardController', ['$rootScope', '$scope', 'Dashb
         self.getDashboards();
     }]);
 
-bettleTrackApp.controller('DashboardInfoController', ['$scope', 'DashboardInfoService', 'CtrlService',
-    function ($scope, DashboardInfoService, CtrlService) {
+bettleTrackApp.controller('DashboardInfoController', ['$rootScope', '$scope', 'DashboardInfoService', 'CtrlService',
+    function ($rootScope, $scope, DashboardInfoService, CtrlService) {
+        $rootScope.activeMainMenuItem = 1;
+        PreLoader.init();
         var self = this;
-        $('#dashboard-content').empty();
+        CallBackHelper.add(function () {
+            $('#dashboard-content').empty();
+            var infoData = {
+                ctrl: CtrlService.getCtrl('info'),
+                data: {}
+            };
+            DashboardInfo.render(infoData);
+        });
+
         CtrlService.setCtrl('info', self);
         self.defaultTitle = 'Dashboard New Title';
         self.onTitleBlur = function (event) {

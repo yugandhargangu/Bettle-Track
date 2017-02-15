@@ -1,5 +1,5 @@
 html{
-    font-size: 90%;
+    font-size: 100%;
 }
 
 .login-form {
@@ -15,10 +15,6 @@ html{
     transform: scale(.8);
 }
 
-.hint2{
-    position: relative;
-}
-
 .page-content {
     padding-top: 3.125rem;
     min-height: 100%;
@@ -27,26 +23,6 @@ html{
 
 .modal-overlay{
     background-color: rgba(0,0,0,0.5);
-}
-
-.sidebar li{
-    height: auto;
-}
-
-.sidebar li a {
-    padding: .425rem 1rem .425rem 1rem;
-    font-size: .6875rem;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.sidebar li a .title-large{
-    font-size: 0.8rem;
-}
-
-.sidebar2-auto{
-    width: auto;
-    max-width: 25rem;
 }
 
 #data-preloader{
@@ -60,6 +36,52 @@ html{
     z-index: 9999;
 }
 
+#main-content{
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    overflow: auto;
+}
+
+#start-screen{
+    position: absolute;
+    z-index: 1029;
+    height: 100%;
+    display: none;
+    top: 0;
+}
+
+.close-btn{
+    position: absolute;
+    height: 1.7rem;
+    width: 1.7rem;
+    min-height: 1.7rem;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0 0 0 0;
+    z-index: 3;
+    outline: 0;
+    cursor: pointer;
+    background-color: #fff;
+    color: #777;
+    top: .25rem;
+    right: .25rem;
+    font-size: 1.3rem;
+    border: 1px solid #ddd;
+}
+
+.close-btn:hover{
+    background-color: #ce352c;
+    color: #fff;
+    border: 1px solid #ce352c;
+}
+
+#start-close-btn{
+    margin-top: 3rem;
+}
+
 .view-btn{
     margin-top: -7px;
     margin-right: 3px;
@@ -69,13 +91,8 @@ html{
     margin: 0;
 }
 
-.select2-hidden-accessible{
-    display: none;
-}
-
-.select2-selection--multiple{
-    overflow-y: auto;
-    height: 2.125rem;
+.input-control.height-auto{
+    height: auto;
 }
 
 .example-less {
@@ -123,10 +140,6 @@ html{
     border: 1px solid #ddd;
 }
 
-.dataTables_paginate-full{
-    width: 100%;
-}
-
 .sidebar-toggle-btn{
     position: absolute;
     cursor: pointer;
@@ -156,32 +169,8 @@ html{
 
 .window-top{
     top:50px !important;
-}
-
-.app-bar .app-bar-menu > li.active{
-    background-color: #ffffff;
-    color: #0072c6;
-}
-
-.app-bar .app-bar-menu > li.active:hover{
-    color: #ffffff;
-}
-
-.dataTables_filter select {
-    appearance: none;
-    margin: 0 .125rem;
-    border: 1px solid #d9d9d9;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    padding: .3125rem;
-}
-
-.treeview ul :hover{
-    background-color: white;
-}
-
-.treeview li.node-bg-white{
-    background-color: white;
+    max-height: 90%;
+    overflow: auto;
 }
 
 #calendar{
@@ -190,25 +179,64 @@ html{
     margin-right: auto;
 }
 
-.notify-system{
-    border: 1px solid #0072c6;
-    min-width: 220px;
-    width:400px;
+.card-layout{
+    width: 99%;
+    overflow-x: hidden;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.notify-system li a{
-    font-size: .875rem;
+.card-item{
+    width: 420px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    text-align: left;
 }
-.notify-text{
+
+.card-item-img{
+    max-height: 8rem;
+    max-width: 6rem;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
-#cell-sidebar{
-    background-color: #71b1d1;
-    height: 100%;
-    overflow-y: auto;
+.label-padding{
+    padding: 0px 5px 2px 5px;
+}
+
+.border-lightGray{
+    border: 1px solid #ddd;
+}
+
+.form-layout{
+    width: 99%;
+    overflow-x: hidden;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-item{
+    width: 420px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+@media screen and (min-width: 801px){
+    .card-layout-inline-scroll{
+        height: calc(100% - 150px);
+        border: 1px solid #ddd;
+    }
+}
+
+@media screen and (max-width:640px){
+    #start-screen{
+        margin-top: 4rem;
+    }
 }
 
 @media screen and (max-width: 800px){
@@ -218,16 +246,22 @@ html{
         margin-right: auto;
     }
 
-    #cell-sidebar{
-        height: 100px;
+    .card-item{
+        max-width: 95%;
     }
-
-    .sidebar {
-        width: 100%;
-    }
-
-    .sidebar li > a{
-        width: 100% !important;
+    .form-item{
+        max-width: 95%;
     }
 }
 
+.default-theme{
+    background-color: #205081;
+}
+
+.fg-default{
+    color: #205081;
+}
+
+.bg-default{
+    background-color: #205081;
+}

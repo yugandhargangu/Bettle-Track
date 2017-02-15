@@ -1,4 +1,4 @@
-/* global AjaxHelper, baseUrl, DashBoardView, DashboardInfo, PreLoader, moment */
+/* global AjaxHelper, baseUrl, DashBoardView, DashboardInfo, PreLoader, moment, bettleTrackApp, CallBackHelper */
 
 'use strict';
 var todayDate = moment().startOf('day');
@@ -7,74 +7,73 @@ var YESTERDAY = todayDate.clone().subtract(1, 'day').format('YYYY-MM-DD');
 var TODAY = todayDate.format('YYYY-MM-DD');
 var TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
 
-var bettleTrackApp = angular.module('bettleTrackApp', ['ngResource']);
-
-bettleTrackApp.controller("SidebarController", function () {
-    $('#calendar').fullCalendar({
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay,listWeek'
-        },
-        editable: true,
-        eventLimit: true, // allow "more" link when too many events
-        navLinks: true,
-        events: [
-            {
-                title: 'All Day Event',
-                start: YM + '-01'
+bettleTrackApp.controller("CalendarController", ['$rootScope', function ($rootScope) {
+        $rootScope.activeMainMenuItem = 0;
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listWeek'
             },
-            {
-                title: 'Long Event',
-                start: YM + '-07',
-                end: YM + '-10'
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: YM + '-09T16:00:00'
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: YM + '-16T16:00:00'
-            },
-            {
-                title: 'Conference',
-                start: YESTERDAY,
-                end: TOMORROW
-            },
-            {
-                title: 'Meeting',
-                start: TODAY + 'T10:30:00',
-                end: TODAY + 'T12:30:00'
-            },
-            {
-                title: 'Lunch',
-                start: TODAY + 'T12:00:00'
-            },
-            {
-                title: 'Meeting',
-                start: TODAY + 'T14:30:00'
-            },
-            {
-                title: 'Happy Hour',
-                start: TODAY + 'T17:30:00'
-            },
-            {
-                title: 'Dinner',
-                start: TODAY + 'T20:00:00'
-            },
-            {
-                title: 'Birthday Party',
-                start: TOMORROW + 'T07:00:00'
-            },
-            {
-                title: 'Click for Google',
-                url: 'http://google.com/',
-                start: YM + '-28'
-            }
-        ]
-    });
-    PreLoader.init();
-});
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            navLinks: true,
+            events: [
+                {
+                    title: 'All Day Event',
+                    start: YM + '-01'
+                },
+                {
+                    title: 'Long Event',
+                    start: YM + '-07',
+                    end: YM + '-10'
+                },
+                {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: YM + '-09T16:00:00'
+                },
+                {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: YM + '-16T16:00:00'
+                },
+                {
+                    title: 'Conference',
+                    start: YESTERDAY,
+                    end: TOMORROW
+                },
+                {
+                    title: 'Meeting',
+                    start: TODAY + 'T10:30:00',
+                    end: TODAY + 'T12:30:00'
+                },
+                {
+                    title: 'Lunch',
+                    start: TODAY + 'T12:00:00'
+                },
+                {
+                    title: 'Meeting',
+                    start: TODAY + 'T14:30:00'
+                },
+                {
+                    title: 'Happy Hour',
+                    start: TODAY + 'T17:30:00'
+                },
+                {
+                    title: 'Dinner',
+                    start: TODAY + 'T20:00:00'
+                },
+                {
+                    title: 'Birthday Party',
+                    start: TOMORROW + 'T07:00:00'
+                },
+                {
+                    title: 'Click for Google',
+                    url: 'http://google.com/',
+                    start: YM + '-28'
+                }
+            ]
+        });
+        PreLoader.init();
+    }]);
