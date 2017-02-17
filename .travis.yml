@@ -1,7 +1,9 @@
+
 language: java
 
-before_install: cd application/bettle/
-
+before_install: 
+  - cd application/bettle/
+  - chmod +x application/bettle/gradlew
 script: "./gradlew clean build"
 
 jdk:
