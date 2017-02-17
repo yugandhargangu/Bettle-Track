@@ -1,0 +1,6 @@
+rootProject.name = 'bettle'
+include 'bettle-common'
+include 'bettle-entity'
+include 'bettle-jpa'
+include 'bettle-mongodb'
+
