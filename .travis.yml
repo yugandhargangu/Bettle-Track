@@ -3,7 +3,8 @@ language: java
 
 before_install: 
   - cd application/bettle/
-  - chmod +x application/bettle/gradlew
+  - chmod +x gradlew
+
 script: "./gradlew clean build"
 
 jdk:
