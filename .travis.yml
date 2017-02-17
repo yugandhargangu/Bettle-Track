@@ -1,0 +1,9 @@
+language: java
+
+before_install: cd application/bettle/
+
+script: "./gradlew clean build"
+
+jdk:
+
+  - oraclejdk8
