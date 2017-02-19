@@ -23,6 +23,7 @@ repositories {
 mainClassName = 'com.bettle.track.SpringBootWebApplication'
 
 dependencies {
+    compileOnly "org.projectlombok:lombok:1.16.14"
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile "org.thymeleaf:thymeleaf-spring4"
     compile "org.springframework.boot:spring-boot-starter-logging"
