@@ -2,11 +2,9 @@ apply plugin: "java"
 
 dependencies {
     compileOnly "org.projectlombok:lombok:1.16.14"
-    compile "org.springframework.boot:spring-boot-starter-thymeleaf:1.5.1.RELEASE"
-    compile "org.springframework.boot:spring-boot-starter-logging:1.5.1.RELEASE"
-    compile "org.springframework.boot:spring-boot-starter-data-mongodb:1.5.1.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
 
-    compile(project(":bettle-common")) {
+    compile(project(':bettle-common')) {
         exclude module: 'org.springframework.boot:spring-boot-starter-thymeleaf'
         exclude module: 'org.springframework.boot:spring-boot-starter-logging'
     }
@@ -16,7 +14,4 @@ dependencies {
         exclude module: 'org.hibernate:hibernate-java8'
     }
     compile(project(':bettle-repo'))
-
-    testCompile "org.springframework.boot:spring-boot-starter-test:1.5.1.RELEASE"
-    testCompile "com.h2database:h2:1.4.193"
 }

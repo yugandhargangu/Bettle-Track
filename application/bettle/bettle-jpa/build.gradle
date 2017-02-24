@@ -15,6 +15,7 @@ dependencies {
         exclude module: 'org.springframework.boot:spring-boot-starter-logging'
         exclude module: 'org.hibernate:hibernate-java8'
     }
+    compile(project(':bettle-repo'))
 
     testCompile "org.springframework.boot:spring-boot-starter-test:1.5.1.RELEASE"
     testCompile "com.h2database:h2:1.4.193"
