@@ -38,6 +38,7 @@ dependencies {
         exclude module: 'org.springframework.boot:spring-boot-starter-logging'
         exclude module: 'org.hibernate:hibernate-java8'
     }
+    compile(project(':bettle-service'))
     compile(project(':bettle-jpa')) {
         exclude module: 'org.springframework.boot:spring-boot-starter-thymeleaf'
         exclude module: 'org.springframework.boot:spring-boot-starter-logging'
@@ -45,6 +46,9 @@ dependencies {
     compile(project(':bettle-mongodb')) {
         exclude module: 'org.springframework.boot:spring-boot-starter-thymeleaf'
         exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+    }
+    compile(project(':bettle-service')) {
+        exclude module: 'org.springframework.boot:spring-boot-starter-thymeleaf'
     }
 
     providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
