@@ -23,7 +23,7 @@ import java.util.Set;
 @Table(name = "m_filters")
 @Where(clause = "active_flag = 1")
 @FilterDefs({
-        @FilterDef(name = "Issue_filter", defaultCondition = "active_flag = 1")
+        @FilterDef(name = "active_issue_filter", defaultCondition = "active_flag = 1")
 })
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -36,9 +36,9 @@ public class IssueFilter extends AbstractParentEntity {
     private int share_with;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "filter_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "Issue_filter_sharing")
+    @Filter(name = "active_issue_filter_sharing")
     private Set<IssueFilterSharing> listIssueFilterSharings;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "filter_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "Issue_filter_field")
+    @Filter(name = "active_issue_filter_field")
     private Set<IssueFilterField> listIssueFilterFields;
 }

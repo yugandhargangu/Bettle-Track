@@ -7,6 +7,8 @@ import com.bettle.track.entities.issue.IssueFilterSharing;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterDefs;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -25,6 +27,11 @@ import java.util.Set;
 @Entity
 @Table(name = "m_projects")
 @Where(clause = "active_flag = 1")
+@FilterDefs({
+        @FilterDef(name = "active_project", defaultCondition = "active_flag == 1")
+
+})
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class Project extends AbstractParentEntity {
@@ -54,17 +61,17 @@ public class Project extends AbstractParentEntity {
     @Filter(name = "active_modules")
     private Set<Module> listModules;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "project_field")
+    @Filter(name = "active_project_field")
     private Set<ProjectField> listProjectFields;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "issue")
+    @Filter(name = "active_issue")
     private Set<Issue> listIssues;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "Issue_filter_field")
+    @Filter(name = "active_issue_filter_field")
     private Set<IssueFilterField> listIssueFilterFields;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "Issue_filter_sharing")
+    @Filter(name = "active_issue_filter_sharing")
     private Set<IssueFilterSharing> listIssueFilterSharings;
 
 }

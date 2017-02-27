@@ -4,6 +4,9 @@ package com.bettle.track.entities.issue;
 import com.bettle.track.entities.AbstractParentEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterDefs;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
@@ -21,6 +24,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "m_tags")
 @Where(clause = "active_flag = 1")
+@FilterDefs({
+        @FilterDef(name = "active_tag", defaultCondition = "active_flag = 1")
+
+})
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class Tag extends AbstractParentEntity {

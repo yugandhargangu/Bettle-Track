@@ -12,6 +12,8 @@ import com.bettle.track.entities.test.TestSetExec;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterDefs;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -29,6 +31,9 @@ import java.util.Set;
 @Entity
 @Table(name = "m_users")
 @Where(clause = "active_flag = 1")
+@FilterDefs({
+        @FilterDef(name = "active_user", defaultCondition = "active_flag == 1")
+})
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class User extends AbstractParentEntity {
@@ -63,7 +68,7 @@ public class User extends AbstractParentEntity {
     private Set<ModuleMember> listModuleMembers;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "responsible_user", cascade = CascadeType.PERSIST)
-    @Filter(name = "issue")
+    @Filter(name = "active_issue")
     private Set<Issue> listIssues;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "responsible_user_id", cascade = CascadeType.PERSIST)
@@ -78,115 +83,4 @@ public class User extends AbstractParentEntity {
     @Filter(name = "active_dashboard")
     private Set<Dashboard> listDashboards;
 
-    public Set<Dashboard> getListDashboards() {
-        return listDashboards;
-    }
-
-    public void setListDashboards(Set<Dashboard> listDashboards) {
-        this.listDashboards = listDashboards;
-    }
-
-    public Set<TestSetExec> getListTestSetExecs() {
-        return listTestSetExecs;
-    }
-
-    public void setListTestSetExecs(Set<TestSetExec> listTestSetExecs) {
-        this.listTestSetExecs = listTestSetExecs;
-    }
-
-    public Set<IPBlock> getListIPBlocks() {
-        return listIPBlocks;
-    }
-
-    public void setListIPBlocks(Set<IPBlock> listIPBlocks) {
-        this.listIPBlocks = listIPBlocks;
-    }
-
-    public Set<UserAndRole> getListUserAndRoles() {
-        return listUserAndRoles;
-    }
-
-    public void setListUserAndRoles(Set<UserAndRole> listUserAndRoles) {
-        this.listUserAndRoles = listUserAndRoles;
-    }
-
-    public Set<ProjectMember> getListProjectMembers() {
-        return listProjectMembers;
-    }
-
-    public void setListProjectMembers(Set<ProjectMember> listProjectMembers) {
-        this.listProjectMembers = listProjectMembers;
-    }
-
-    public Set<ModuleMember> getListModuleMembers() {
-        return listModuleMembers;
-    }
-
-    public void setListModuleMembers(Set<ModuleMember> listModuleMembers) {
-        this.listModuleMembers = listModuleMembers;
-    }
-
-    public Set<Issue> getListIssues() {
-        return listIssues;
-    }
-
-    public void setListIssues(Set<Issue> listIssues) {
-        this.listIssues = listIssues;
-    }
-
-    public Set<ProjectPageAccess> getListProjectPageAccesses() {
-        return listProjectPageAccesses;
-    }
-
-    public void setListProjectPageAccesses(Set<ProjectPageAccess> listProjectPageAccesses) {
-        this.listProjectPageAccesses = listProjectPageAccesses;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-
-    public int getLogin_count() {
-        return login_count;
-    }
-
-    public void setLogin_count(int login_count) {
-        this.login_count = login_count;
-    }
-
-    public boolean isStatus_flag() {
-        return status_flag;
-    }
-
-    public void setStatus_flag(boolean status_flag) {
-        this.status_flag = status_flag;
-    }
-
-    public Set<UserInfo> getListUserInfos() {
-        return listUserInfos;
-    }
-
-    public void setListUserInfos(Set<UserInfo> listUserInfos) {
-        this.listUserInfos = listUserInfos;
-    }
-
-    public Set<UserGroupUser> getListUserGroups() {
-        return listUserGroups;
-    }
-
-    public void setListUserGroups(Set<UserGroupUser> listUserGroups) {
-        this.listUserGroups = listUserGroups;
-    }
-
-    public Set<UserAuth> getListUserAuths() {
-        return listUserAuths;
-    }
-
-    public void setListUserAuths(Set<UserAuth> listUserAuths) {
-        this.listUserAuths = listUserAuths;
-    }
 }

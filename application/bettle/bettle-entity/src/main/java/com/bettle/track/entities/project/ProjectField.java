@@ -25,7 +25,7 @@ import java.util.Set;
 @Table(name = "m_custom_fields")
 @Where(clause = "active_flag = 1")
 @FilterDefs({
-        @FilterDef(name = "project_field", defaultCondition = "active_flag = 1")
+        @FilterDef(name = "active_project_field", defaultCondition = "active_flag = 1")
 })
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -43,7 +43,7 @@ public class ProjectField extends AbstractParentEntity {
     private String select_options;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "custom_field_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "issue_field")
+    @Filter(name = "active_issue_field")
     private Set<IssueField> listFields;
 
 }

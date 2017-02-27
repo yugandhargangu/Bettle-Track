@@ -24,7 +24,7 @@ import javax.persistence.*;
 @Table(name = "m_filters")
 @Where(clause = "active_flag = 1")
 @FilterDefs({
-        @FilterDef(name = "Issue_filter_field", defaultCondition = "active_flag = 1")
+        @FilterDef(name = "active_issue_filter_field", defaultCondition = "active_flag = 1")
 })
 @EqualsAndHashCode(callSuper = true)
 @Data

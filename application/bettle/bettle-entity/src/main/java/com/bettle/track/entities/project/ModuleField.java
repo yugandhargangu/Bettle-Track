@@ -43,7 +43,7 @@ public class ModuleField extends AbstractParentEntity {
     private boolean null_flag;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "module_custom_field_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "issue_field")
+    @Filter(name = "active_issue_field")
     private Set<IssueField> listIssueFields;
 
 }

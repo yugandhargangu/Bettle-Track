@@ -6,6 +6,8 @@ import com.bettle.track.entities.issue.IssueFilterSharing;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterDefs;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -23,6 +25,10 @@ import java.util.Set;
 @Entity
 @Table(name = "m_user_group")
 @Where(clause = "active_flag = 1")
+@FilterDefs({
+        @FilterDef(name = "active_user_group", defaultCondition = "active_flag == 1")
+})
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class UserGroup extends AbstractParentEntity {
@@ -35,9 +41,9 @@ public class UserGroup extends AbstractParentEntity {
     private Set<UserGroupUser> listUser = null;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user_group_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "Issue_filter_field")
+    @Filter(name = "active_issue_filter_field")
     private Set<IssueFilterField> listIssueFilterFields;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user_group_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "Issue_filter_sharing")
+    @Filter(name = "active_issue_filter_sharing")
     private Set<IssueFilterSharing> listIssueFilterSharings;
 }

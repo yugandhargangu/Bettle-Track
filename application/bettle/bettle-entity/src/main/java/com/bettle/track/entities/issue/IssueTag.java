@@ -21,7 +21,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "m_issues_tags")
 @Where(clause = "active_flag = 1")
-@FilterDefs({@FilterDef(name = "issue_tag", defaultCondition = "active_flag = 1")})
+@FilterDefs({@FilterDef(name = "active_issue_tag", defaultCondition = "active_flag = 1")})
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class IssueTag extends AbstractParentEntity {

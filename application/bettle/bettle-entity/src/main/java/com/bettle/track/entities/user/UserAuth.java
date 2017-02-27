@@ -22,7 +22,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "m_user_auth")
 @Where(clause = "active_flag = 1")
-@FilterDefs({@FilterDef(name = "active_user_auth", defaultCondition = "active_flag = 1")})
+@FilterDefs({
+        @FilterDef(name = "active_user_auth", defaultCondition = "active_flag = 1")
+})
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class UserAuth extends AbstractParentEntity {

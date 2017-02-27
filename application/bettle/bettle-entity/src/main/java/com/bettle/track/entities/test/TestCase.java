@@ -40,7 +40,7 @@ public class TestCase extends AbstractParentEntity {
     private Set<TestCaseInfo> listTestCaseInfos;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "test_case_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "m_testCaseAttachment")
+    @Filter(name = "active_test_case_attachment")
     private Set<TestCaseAttachment> listTestCaseAttachments;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "test_case_id", cascade = CascadeType.PERSIST)

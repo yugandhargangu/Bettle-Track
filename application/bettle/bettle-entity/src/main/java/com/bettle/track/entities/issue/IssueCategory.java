@@ -22,7 +22,7 @@ import javax.persistence.*;
 @Table(name = "m_issues_categories")
 @Where(clause = "active_flag = 1")
 @FilterDefs({
-        @FilterDef(name = "issues_categories", defaultCondition = "active_flag = 1")
+        @FilterDef(name = "active_issues_categories", defaultCondition = "active_flag = 1")
 })
 @EqualsAndHashCode(callSuper = true)
 @Data

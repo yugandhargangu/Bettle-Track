@@ -23,7 +23,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "m_user_group_users")
 @Where(clause = "active_flag = 1")
-@FilterDefs({@FilterDef(name = "active_user_group_users", defaultCondition = "active_flag = 1")})
+@FilterDefs({
+        @FilterDef(name = "active_user_group_users", defaultCondition = "active_flag = 1")
+})
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class UserGroupUser extends AbstractParentEntity {

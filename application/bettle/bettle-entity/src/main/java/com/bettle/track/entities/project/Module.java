@@ -46,7 +46,7 @@ public class Module extends AbstractParentEntity {
     private LocalDate end_date;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "module_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "issue")
+    @Filter(name = "active_issue")
     private Set<Issue> listIssues;
 
 }

@@ -29,7 +29,7 @@ import java.util.Set;
 @Table(name = "m_issues")
 @Where(clause = "active_flag = 1")
 @FilterDefs({
-        @FilterDef(name = "issue", defaultCondition = "active_flag = 1")
+        @FilterDef(name = "active_issue", defaultCondition = "active_flag = 1")
 })
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -63,31 +63,31 @@ public class Issue extends AbstractParentEntity {
     private String environment;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "issue_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "issue_tag")
+    @Filter(name = "active_issue_tag")
     private Set<IssueTag> listIssueTags;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "issue_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "issues_categories")
+    @Filter(name = "active_issues_categories")
     private Set<IssueCategory> listIssueCategories;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "issue_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "issue_desc")
+    @Filter(name = "active_issue_comments")
     private Set<IssueDesc> listIssueDescs;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "issue_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "issue_procedures")
+    @Filter(name = "active_issue_procedures")
     private Set<IssueProcedure> listIssueProcedures;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "issue_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "issue_attachment")
+    @Filter(name = "active_issue_attachment")
     private Set<IssueAttchment> listIssueAttchments;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "issue_id", cascade = CascadeType.PERSIST)
     @Filter(name = "issue_comments")
     private Set<IssueComment> listIssueComments;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "issue_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "issue_status")
+    @Filter(name = "active_issue_status")
     private Set<IssueStatus> listIssueStatuses;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "issue_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "issue_history")
+    @Filter(name = "active_issue_history")
     private Set<IssueHistory> listIssueHistories;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "issue_id", cascade = CascadeType.PERSIST)
-    @Filter(name = "issue_field")
+    @Filter(name = "active_issue_field")
     private Set<IssueField> listIssueFields;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "issue_id", cascade = CascadeType.PERSIST)
     @Filter(name = "active_test_case_issue")

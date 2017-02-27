@@ -20,9 +20,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "m_test_requirements")
 @Where(clause = "active_flag = 1")
-@FilterDefs(
-        {@FilterDef(name = "active_test_case_requirement", defaultCondition = "active_flag = 1")}
-        )
+@FilterDefs({
+        @FilterDef(name = "active_test_case_requirement", defaultCondition = "active_flag = 1")
+})
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class TestCaseRequirement extends AbstractParentEntity {

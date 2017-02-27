@@ -25,7 +25,7 @@ import java.util.Set;
 @Table(name = "m_test_folder")
 @Where(clause = "active_flag = 1")
 @FilterDefs({
-        @FilterDef(name = "m_test_folder", defaultCondition = "active_flag = 1")
+        @FilterDef(name = "active_test_folder", defaultCondition = "active_flag = 1")
 })
 @EqualsAndHashCode(callSuper = true)
 @Data

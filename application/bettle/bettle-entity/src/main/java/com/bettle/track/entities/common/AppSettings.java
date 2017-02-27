@@ -25,8 +25,8 @@ import javax.persistence.Table;
 @FilterDefs({
         @FilterDef(name = "active_app_settings", defaultCondition = "active_flag = 1")
 })
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class AppSettings extends AbstractParentEntity {
     @Column(name = "key", length = 100, nullable = false, insertable = true, updatable = true)
     private String key;

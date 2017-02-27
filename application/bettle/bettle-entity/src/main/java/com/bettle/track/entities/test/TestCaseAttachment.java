@@ -21,7 +21,7 @@ import javax.persistence.*;
 @Table(name = "m_test_case_attachments")
 @Where(clause = "active_flag = 1")
 @FilterDefs({
-        @FilterDef(name = "m_testCaseAttachment", defaultCondition = "active_flag = 1")
+        @FilterDef(name = "active_test_case_attachment", defaultCondition = "active_flag = 1")
 })
 @EqualsAndHashCode(callSuper = true)
 @Data

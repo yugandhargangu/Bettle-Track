@@ -3,6 +3,8 @@ package com.bettle.track.entities.issue;
 import com.bettle.track.entities.AbstractParentEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterDefs;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
@@ -20,6 +22,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "m_categories")
 @Where(clause = "active_flag = 1")
+@FilterDefs({
+        @FilterDef(name = "active_category", defaultCondition = "active_flag = 1")
+})
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class Category extends AbstractParentEntity {
