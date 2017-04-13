@@ -1,44 +1,135 @@
 {
+    "labels": {
+        "project_code": "Project Code",
+        "name": "Project Name",
+        "modules": "No of Modules",
+        "members": "Total Members",
+        "start_date": "Start Date",
+        "end_date": "End Date",
+        "view_details": "View Details",
+        "test_plan": "Test Plan",
+        "test_lab": "Test Lab"
+    },
     "projects": [
         {
             "id": 1,
-            "name": "Project One"
+            "code": "BT001",
+            "modules": 2,
+            "members": 100,
+            "start_date": "2016/11/01",
+            "end_date": "2017/11/01",
+            "name": "Project One",
+            "img_src": "../public/img/projects.png"
         },
         {
             "id": 2,
-            "name": "Project Two"
+            "code": "BT001",
+            "modules": 2,
+            "members": 100,
+            "start_date": "2016/11/01",
+            "end_date": "2017/11/01",
+            "name": "Project Two",
+            "img_src": "../public/img/projects.png"
         },
         {
             "id": 3,
-            "name": "Project Three"
+            "code": "BT001",
+            "modules": 2,
+            "members": 100,
+            "start_date": "2016/11/01",
+            "end_date": "2017/11/01",
+            "name": "Project Three",
+            "img_src": "../public/img/projects.png"
         },
         {
             "id": 4,
-            "name": "Project Four"
+            "code": "BT001",
+            "modules": 2,
+            "members": 100,
+            "start_date": "2016/11/01",
+            "end_date": "2017/11/01",
+            "name": "Project Four",
+            "img_src": "../public/img/projects.png"
         },
         {
             "id": 5,
-            "name": "Project Five"
+            "code": "BT001",
+            "modules": 2,
+            "members": 100,
+            "start_date": "2016/11/01",
+            "end_date": "2017/11/01",
+            "name": "Project Five",
+            "img_src": "../public/img/projects.png"
         },
         {
             "id": 6,
-            "name": "Project Six"
+            "code": "BT001",
+            "modules": 2,
+            "members": 100,
+            "start_date": "2016/11/01",
+            "end_date": "2017/11/01",
+            "name": "Project Six",
+            "img_src": "../public/img/projects.png"
         },
         {
             "id": 7,
-            "name": "Project Seven"
+            "code": "BT001",
+            "modules": 2,
+            "members": 100,
+            "start_date": "2016/11/01",
+            "end_date": "2017/11/01",
+            "name": "Project Seven",
+            "img_src": "../public/img/projects.png"
         },
         {
             "id": 8,
-            "name": "Project Eight"
+            "code": "BT001",
+            "modules": 2,
+            "members": 100,
+            "start_date": "2016/11/01",
+            "end_date": "2017/11/01",
+            "name": "Project Eight",
+            "img_src": "../public/img/projects.png"
         },
         {
             "id": 9,
-            "name": "Project Nine"
+            "code": "BT001",
+            "modules": 2,
+            "members": 100,
+            "start_date": "2016/11/01",
+            "end_date": "2017/11/01",
+            "name": "Project Nine",
+            "img_src": "../public/img/projects.png"
         },
         {
             "id": 10,
-            "name": "Project ten"
+            "code": "BT001",
+            "modules": 2,
+            "members": 100,
+            "start_date": "2016/11/01",
+            "end_date": "2017/11/01",
+            "name": "Project ten",
+            "img_src": "../public/img/projects.png"
+        },
+        {
+            "id": 11,
+            "code": "BT001",
+            "modules": 2,
+            "members": 100,
+            "start_date": "2016/11/01",
+            "end_date": "2017/11/01",
+            "name": "Project eleven",
+            "img_src": "../public/img/projects.png"
+        },
+        {
+            "id": 12,
+            "code": "BT001",
+            "modules": 2,
+            "members": 100,
+            "start_date": "2016/11/01",
+            "end_date": "2017/11/01",
+            "name": "Project twelve",
+            "img_src": "../public/img/projects.png"
         }
     ]
 }

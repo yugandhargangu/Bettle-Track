@@ -1,8 +1,8 @@
-/* global AjaxHelper, baseUrl, tinyMCE, PreLoader */
+/* global AjaxHelper, baseUrl, tinyMCE, PreLoader, bettleTrackApp, CallBackHelper */
 
 'use strict';
 
-var Urls = {
+var IssueUrls = {
     sidebar: {
         method: "GET",
         url: baseUrl + "server/issues/sidebar.json"
@@ -17,36 +17,16 @@ var Urls = {
     }
 };
 
-var CallBackHelper = {
-    callbacks: []
-};
-CallBackHelper.add = function (callback) {
-    this.callbacks.push(callback);
-};
-
-var tinyMceInitCount = {
+var issueTinyMceInitCount = {
     viewType: 0,
     issueInfo: 0
 };
 
-var bettleTrackApp = angular.module('bettleTrackApp', ['ngResource', 'ui.router']);
-
-bettleTrackApp.factory('SidebarService', ['$resource', function ($resource) {
-        return $resource("/", {}, {
-            query: {
-                method: Urls.sidebar.method,
-                url: Urls.sidebar.url,
-                isArray: false,
-                transformResponse: AjaxHelper.generateResponse
-            }
-        });
-    }]);
-
 bettleTrackApp.factory('FilterService', ['$resource', function ($resource) {
         return $resource("/", {}, {
             query: {
-                method: Urls.filters.method,
-                url: Urls.filters.url,
+                method: IssueUrls.filters.method,
+                url: IssueUrls.filters.url,
                 isArray: false,
                 transformResponse: AjaxHelper.generateResponse
             }
@@ -58,75 +38,23 @@ bettleTrackApp.service('SearchService', function () {
     this.type = 'search'; // search, project, common, filter
 });
 
-// sidebar controller
-bettleTrackApp.controller('SidebarController', ['$rootScope', '$scope', 'SidebarService', function ($rootScope, $scope, SidebarService) {
-        var self = this;
-        $rootScope.activeMainMenuItem = 5;
-        $rootScope.sidebarCode = '';
-        $rootScope.sidebarId = 0;
-        $rootScope.detail_view = false;
-        self.projects = [];
-        self.filters = [];
-        SidebarService.query({}, function (response) {
-            self.projects = response.data.projects;
-            self.filters = response.data.filters;
-        });
-    }]);
-
-bettleTrackApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/filter//');
-        $stateProvider.state('filter', {
-            url: '/filter/:type/:id',
-            templateUrl: 'issues/search.html',
-            controller: 'FilterController as ctrl'
-        }).state('issue', {
-            url: '/issue/:issue_id',
-            templateUrl: 'issues/issue_info.html',
-            controller: 'IssueInfoController as ctrl'
-        }).state('filters', {
-            url: '/filters',
-            templateUrl: 'issues/filters.html',
-            controller: 'FiltersController as ctrl'
-        }).state('filter.listview', {
-            url: '/list',
-            templateUrl: 'issues/issue_listview.html',
-            controller: 'ViewTypeController as ctrl'
-        }).state('filter.detailview', {
-            url: '/details',
-            templateUrl: 'issues/issue_detailview.html',
-            controller: 'ViewTypeController as ctrl'
-        });
-    }]);
-
-bettleTrackApp.run(function ($rootScope, $timeout) {
-    $rootScope.$on('$viewContentLoaded', function (event) {
-        $timeout(function () {
-            if (CallBackHelper.callbacks.length > 0) {
-                for (var i = 0; i < CallBackHelper.callbacks.length; i++) {
-                    CallBackHelper.callbacks[i]();
-                    CallBackHelper.callbacks.shift();
-                }
-            }
-        });
-    });
-});
-
 bettleTrackApp.controller('FilterController', ['$rootScope', '$stateParams', '$state', 'SearchService',
     function ($rootScope, $stateParams, $state, SearchService) {
+        $rootScope.activeMainMenuItem = 5;
         var self = this;
         self.filter_type = '';
         self.filter_name = '';
-        if ($stateParams.type == 'p') {
+        if ($stateParams.type === 'p') {
             self.filter_type = 'Project';
             self.filter_name = 'Selected Project Name';
             $rootScope.sidebarCode = 'project';
             $rootScope.sidebarId = $stateParams.id;
-        } else if ($stateParams.type == 'c') {
+        } else if ($stateParams.type === 'c') {
             self.filter_type = 'Common Filter';
             self.filter_name = 'Selected Filter name';
             $rootScope.sidebarCode = 'common';
             $rootScope.sidebarId = $stateParams.id;
-        } else if ($stateParams.type == 'f') {
+        } else if ($stateParams.type === 'f') {
             self.filter_type = 'Filter';
             self.filter_name = 'Selected Filter name';
             $rootScope.sidebarCode = 'filter';
@@ -137,7 +65,7 @@ bettleTrackApp.controller('FilterController', ['$rootScope', '$stateParams', '$s
             $rootScope.sidebarCode = 'search';
 
         }
-        if ($state.current.name == 'filter.detailview') {
+        if ($state.current.name === 'filter.detailview') {
             $rootScope.detail_view = true;
         }
         if ($rootScope.detail_view) {
@@ -150,13 +78,14 @@ bettleTrackApp.controller('FilterController', ['$rootScope', '$stateParams', '$s
 
 bettleTrackApp.controller('IssueInfoController', ['$rootScope', '$stateParams', '$state', 'SearchService',
     function ($rootScope, $stateParams, $state, SearchService) {
+        $rootScope.activeMainMenuItem = 5;
         var self = this;
         $rootScope.sidebarCode = 'new_issue';
         self.issueinfo = {};
-        if (tinyMceInitCount.issueInfo > 0) {
+        if (issueTinyMceInitCount.issueInfo > 0) {
             tinyMCE.EditorManager.editors = [];
         }
-        tinyMceInitCount.issueInfo++;
+        issueTinyMceInitCount.issueInfo++;
         CallBackHelper.add(function () {
             tinyMCE.init({
                 selector: "#info-environment",
@@ -197,6 +126,7 @@ bettleTrackApp.controller('IssueInfoController', ['$rootScope', '$stateParams', 
 
 bettleTrackApp.controller('FiltersController', ['$rootScope', '$stateParams', '$state', 'FilterService',
     function ($rootScope, $stateParams, $state, FilterService) {
+        $rootScope.activeMainMenuItem = 5;
         $rootScope.sidebarCode = "all_filter";
         var self = this;
         self.alreadyInitialized = false;
@@ -207,7 +137,7 @@ bettleTrackApp.controller('FiltersController', ['$rootScope', '$stateParams', '$
             self.filters = response.data.filters;
         });
         self.changeFilterType = function () {
-            if (self.changeFilterId == '4') {
+            if (self.changeFilterId === '4') {
                 self.showSearch = true;
                 if (!self.alreadyInitialized) {
                     $('#filter_owner_select').select2({
@@ -246,12 +176,12 @@ bettleTrackApp.controller('FiltersController', ['$rootScope', '$stateParams', '$
 bettleTrackApp.controller('ViewTypeController', ['$rootScope', '$stateParams', '$state', 'SearchService',
     function ($rootScope, $stateParams, $state, SearchService) {
         var self = this;
-        if ($state.current.url == '/details') {
+        if ($state.current.url === '/details') {
             $rootScope.detail_view = true;
-            if (tinyMceInitCount.viewType > 0) {
+            if (issueTinyMceInitCount.viewType > 0) {
                 tinyMCE.EditorManager.editors = [];
             }
-            tinyMceInitCount.viewType++;
+            issueTinyMceInitCount.viewType++;
             CallBackHelper.add(function () {
                 tinyMCE.init({
                     selector: "#issue-enviroment",

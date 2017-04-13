@@ -1,3 +1,5 @@
+/* global baseUrl, AjaxHelper */
+
 'use strict';
 
 $(function () {

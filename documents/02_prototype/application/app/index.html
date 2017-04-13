@@ -8,63 +8,320 @@
         <link rel="stylesheet" href="../public/css/metro-icons.min.css"/>
         <link rel="stylesheet" href="../public/css/metro-responsive.min.css"/>
         <link rel="stylesheet" href="../public/css/metro-schemes.min.css"/>
+        <link rel="stylesheet" href="../public/css/fullcalendar.min.css"/>
+        <link rel="stylesheet" href="../public/css/overlay.css"/>
         <link rel="stylesheet" href="../public/css/app.css"/>
     </head>
-    <body class="bg-steel" ng-app="bettleTrackApp">
+    <body class="bg-white" ng-app="bettleTrackApp">
         <div data-role="preloader" data-type="cycle" data-style="color" id="data-preloader"></div>
-        <div class="app-bar fixed-top navy" ng-include src="'appbar.html'" data-role="appbar">
-        </div>
-
-        <div class="page-content" ng-controller="DashboardController as ctrl">
-            <div class="flex-grid" style="height: 100%;">
-                <div class="row" style="height: 100%;max-height: 100%;">
-                    <div class="cell size-x200" id="cell-sidebar">
-                        <ul class="sidebar">
-                            <li>
-                                <a href="" ng-click="ctrl.createDashboard()">Create Dashboard</a>
-                            </li>
-                            <li ng-class="{true:'active', false:''}[ctrl.currentDashboard.id === dashboard.id]" ng-repeat="dashboard in ctrl.dashboards">
-                                <a href="" ng-click="ctrl.loadDashboard(dashboard)">{{dashboard.name}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="cell auto-size bg-white" id="cell-content" style="height: 100%;max-height: 100%;overflow-y: auto;">
-                        <div class="panel margin10">
-                            <div class="heading" style="width: 100%;">
-                                <span class="title">{{ctrl.currentDashboard.name}}</span>
-                                <span class="right" style="float: right; padding-right:.625rem;"><a href="" title="delete" ng-click="ctrl.deleteDashboard()"><span class="mif-bin fg-white"></span></a></span>
-                                <span class="right" style="float: right; padding-right:.625rem;"><a href="" title="edit" ng-click="ctrl.editDashboard()"><span class="mif-pencil fg-white"></span></a></span>
+        <div class="app-bar fixed-top default-theme" data-role="appbar" ng-controller="MenuController as ctrl">
+            <a class="app-bar-element" href="" ng-click="ctrl.toggleStartScreen()">
+                <span id="toggle-tiles-dropdown" class="mif-apps mif-2x"></span>
+            </a>
+            <span class="app-bar-divider"></span>
+            <a ui-sref="index" class="app-bar-element branding">
+                <img src="../public/img/logo.png" alt="Bettle Track" style="max-height: 2rem;">
+            </a>
+            <span class="app-bar-divider"></span>
+            <ul class="app-bar-menu small-dropdown">
+                <li ng-class="{true:'active', false:''}[activeMainMenuItem === 1]">
+                    <a href="" class="dropdown-toggle">Dashboard</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a ui-sref="dashboard_info({dashboard_id:0})">Create Dashboard</a></li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="" class="dropdown-toggle">Dashboards</a>
+                            <ul class="d-menu" data-role="dropdown">
+                                <li><a ui-sref="dashboard({dashboard_id:1})">Dashboard 1</a></li>
+                                <li><a ui-sref="dashboard({dashboard_id:2})">Dashboard 2</a></li>
+                                <li><a ui-sref="dashboard({dashboard_id:3})">Dashboard 3</a></li>
+                                <li><a ui-sref="dashboard({dashboard_id:4})">Dashboard 4</a></li>
+                                <li><a ui-sref="dashboard({dashboard_id:5})">Dashboard 5</a></li>
+                                <li><a ui-sref="dashboard({dashboard_id:6})">Dashboard 6</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-class="{true:'active', false:''}[activeMainMenuItem === 2]">
+                    <a href="" class="dropdown-toggle">Users</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a ui-sref="users({group_id:0})">Users</a></li>
+                        <li><a ui-sref="usergroups">User Groups</a></li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="" class="dropdown-toggle">My User Groups</a>
+                            <ul class="d-menu" data-role="dropdown">
+                                <li><a ui-sref="users({group_id:1})">User Group 1</a></li>
+                                <li><a ui-sref="users({group_id:0})">User Group 2</a></li>
+                                <li><a ui-sref="users({group_id:0})">User Group 2</a></li>
+                                <li><a ui-sref="users({group_id:0})">User Group 2</a></li>
+                                <li><a ui-sref="users({group_id:0})">User Group 2</a></li>
+                                <li><a ui-sref="users({group_id:0})">User Group 2</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-class="{true:'active', false:''}[activeMainMenuItem === 3]">
+                    <a href="" class="dropdown-toggle">Projects</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a ui-sref="project({project_id:0})">New project</a></li>
+                        <li><a ui-sref="projects">All projects</a></li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="" class="dropdown-toggle">Projects</a>
+                            <ul class="d-menu" data-role="dropdown">
+                                <li><a ui-sref="project({project_id:1})">Project 1</a></li>
+                                <li><a ui-sref="project({project_id:2})">Project 2</a></li>
+                                <li><a ui-sref="project({project_id:3})">Project 3</a></li>
+                                <li><a ui-sref="project({project_id:4})">Project 4</a></li>
+                                <li><a ui-sref="project({project_id:5})">Project 5</a></li>
+                                <li><a ui-sref="project({project_id:6})">Project 6</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-class="{true:'active', false:''}[activeMainMenuItem === 4]">
+                    <a href="" class="dropdown-toggle"> Testing </a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li>
+                            <a href="" class="dropdown-toggle">Issues</a>
+                            <ul class="d-menu" data-role="dropdown">
+                                <li><a ui-sref="tp_project({project_id:1})">Project One</a></li>
+                                <li><a ui-sref="tp_project({project_id:2})">Project Two</a></li>
+                                <li><a ui-sref="tp_project({project_id:3})">Project Three</a></li>
+                                <li><a ui-sref="tp_project({project_id:4})">Project Four</a></li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="" class="dropdown-toggle">Issues</a>
+                            <ul class="d-menu" data-role="dropdown">
+                                <li><a ui-sref="tl_project({project_id:1})">Project One</a></li>
+                                <li><a ui-sref="tl_project({project_id:2})">Project Two</a></li>
+                                <li><a ui-sref="tl_project({project_id:3})">Project Three</a></li>
+                                <li><a ui-sref="tl_project({project_id:4})">Project Four</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-class="{true:'active', false:''}[activeMainMenuItem === 5]">
+                    <a href="" class="dropdown-toggle">Issues</a>
+                    <ul class="d-menu" data-role="dropdown">
+                        <li><a ui-sref="issue({issue_id:0})">New issue</a></li>
+                        <li><a ui-sref="filter({type:'',id:0})">New filter</a></li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="" class="dropdown-toggle">Issues</a>
+                            <ul class="d-menu" data-role="dropdown">
+                                <li><a ui-sref="filter({type:'c',id:0})">Search for issues</a></li>
+                                <li><a ui-sref="filter({type:'c',id:0})">My open issues</a></li>
+                                <li><a ui-sref="filter({type:'c',id:0})">Reported by me</a></li>
+                                <li><a ui-sref="filter({type:'c',id:0})">All issues</a></li>
+                                <li><a ui-sref="filter({type:'c',id:0})">Open issues</a></li>
+                                <li><a ui-sref="filter({type:'c',id:0})">Recently viewed</a></li>
+                                <li><a ui-sref="filter({type:'c',id:0})">Recently added</a></li>
+                                <li><a ui-sref="filter({type:'c',id:0})">Recently resolved</a></li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="" class="dropdown-toggle">Filters</a>
+                            <ul class="d-menu" data-role="dropdown">
+                                <li><a ui-sref="filters">My filters</a></li>
+                                <li><a ui-sref="filter({type:'f',id:0})">My favorite filters</a></li>
+                                <li><a ui-sref="filter({type:'f',id:0})">Filter 1</a></li>
+                                <li><a ui-sref="filter({type:'f',id:0})">Filter 2</a></li>
+                                <li><a ui-sref="filter({type:'f',id:0})">Filter 3</a></li>
+                                <li><a ui-sref="filter({type:'f',id:0})">Filter 4</a></li>
+                                <li><a ui-sref="filter({type:'f',id:0})">Filter 5</a></li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="" class="dropdown-toggle">Projects</a>
+                            <ul class="d-menu" data-role="dropdown">
+                                <li><a ui-sref="filter({type:'p', id:0})">Project 1</a></li>
+                                <li><a ui-sref="filter({type:'p', id:0})">Project 2</a></li>
+                                <li><a ui-sref="filter({type:'p', id:0})">Project 3</a></li>
+                                <li><a ui-sref="filter({type:'p', id:0})">Project 4</a></li>
+                                <li><a ui-sref="filter({type:'p', id:0})">Project 5</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="app-bar-element place-right">
+                <a class="dropdown-toggle fg-white"><span class="mif-user mif-2x"></span></a>
+                <div class="app-bar-drop-container bg-white fg-dark place-right"
+                     data-role="dropdown" data-no-close="true">
+                    <div class="padding10">
+                        <div class="image-container rounded">
+                            <div class="frame">
+                                <img src="../public/img/default.png" alt="img" style="max-height: 8rem;max-width: 6rem;overflow: hidden;">
                             </div>
-                            <div class="content" id="dashboard-view">
+                        </div>
+                        <div class="input-control text">
+                            <span class="mif-user prepend"> Yugandhar Gangu</span>
+                        </div>
+                        <div class="input-control text">
+                            <span class="mif-layers prepend"> Administrator</span>
+                        </div>
+                        <div class="form-actions">
+                            <a ui-sref="myprofile" class="button">Profile</a>
+                            <button class="button link">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-grid no-responsive-future" id="start-screen" ng-controller="StartController as ctrl">
+            <div class="row" style="height: 100%;">
+                <div class="cell auto-size">
+                    <div id="start-close-btn" class="close-btn" ng-click="ctrl.closeStartScreen()">&times;</div>
+                    <div class="tile-area tile-area-scheme-dark fg-white">
+                        <div class="tile-group double">
+                            <span class="tile-group-title">General</span>
+                            <div class="tile-container">
+                                <div class="tile bg-indigo fg-white" data-role="tile" ng-click="ctrl.goToState('calendar')">
+                                    <div class="tile-content iconic">
+                                        <span class="icon mif-calendar"></span>
+                                    </div>
+                                    <span class="tile-label">Calendar</span>
+                                </div>
+                                <div class="tile bg-darkBlue fg-white" data-role="tile" ng-click="ctrl.goToState('inbox')">
+                                    <div class="tile-content iconic">
+                                        <span class="icon mif-envelop"></span>
+                                    </div>
+                                    <span class="tile-label">Inbox</span>
+                                </div>
 
+                                <div class="tile-large bg-steel fg-white" data-role="tile">
+                                    <div class="tile-content" id="weather_bg" style="background: top left no-repeat; background-size: cover">
+                                        <div class="padding10">
+                                            <h1 id="weather_icon" style="font-size: 6em;position: absolute; top: 10px; right: 10px;"></h1>
+                                            <h1 id="city_temp"></h1>
+                                            <h2 id="city_name" class="text-light"></h2>
+                                            <h4 id="city_weather"></h4>
+                                            <p id="city_weather_daily"></p>
+
+                                            <p class="no-margin text-shadow">Issue Assigned:  2017/02/25</p>
+                                            <p class="no-margin text-shadow">New file added: 2017/02/25</p>
+                                            <p class="no-margin text-shadow">Another issue added: 2017/02/25</p>
+                                            <p class="no-margin text-shadow">Test case redesign request: 2017/02/25</p>
+                                        </div>
+                                    </div>
+                                    <span class="tile-label">Show more</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tile-group double">
+                            <span class="tile-group-title">Issues</span>
+                            <div class="tile-container">
+                                <div class="tile-wide bg-green fg-white" data-role="tile">
+                                    <div class="tile-content iconic">
+                                        <div class="padding10">
+                                            <p>Total Assigned Issues: 15</p>
+                                            <p>Total Open Issues: 10</p>
+                                            <p>Total Fixed Issues: 5</p>
+                                        </div>
+                                    </div>
+                                    <div class="tile-label">Assigned Issues</div>
+                                </div>
+                                <div class="tile bg-steel fg-white" data-role="tile">
+                                    <div class="tile-content">
+                                        <p>Issue 1</p>
+                                    </div>
+                                    <div class="tile-label">2017/01/01</div>
+                                </div>
+                                <div class="tile bg-steel fg-white" data-role="tile">
+                                    <div class="tile-content">
+                                        <p>Issue 2</p>
+                                    </div>
+                                    <div class="tile-label">2017/01/01</div>
+                                </div>
+                                <div class="tile bg-steel fg-white" data-role="tile">
+                                    <div class="tile-content">
+                                        <p>Issue 3</p>
+                                    </div>
+                                    <div class="tile-label">2017/01/01</div>
+                                </div>
+                                <div class="tile bg-steel fg-white" data-role="tile">
+                                    <div class="tile-content">
+                                        <p>Issue 4</p>
+                                    </div>
+                                    <div class="tile-label">2017/01/01</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tile-group double">
+                            <span class="tile-group-title">Other</span>
+                            <div class="tile-container">
+                                <a ui-sref="myprofile" class="tile bg-teal fg-white" data-role="tile">
+                                    <div class="tile-content iconic">
+                                        <span class="icon mif-profile"></span>
+                                    </div>
+                                    <span class="tile-label">My profile</span>
+                                </a>
+                                <div class="tile bg-darkGreen fg-white" data-role="tile">
+                                    <div class="tile-content iconic">
+                                        <span class="icon mif-shopping-basket"></span>
+                                    </div>
+                                    <span class="tile-label">Shopping</span>
+                                </div>
+                                <div class="tile bg-cyan fg-white" data-role="tile">
+                                    <div class="tile-content iconic">
+                                        <span class="icon mif-skype"></span>
+                                    </div>
+                                    <div class="tile-label">Skype</div>
+                                </div>
+                                <div class="tile bg-darkBlue fg-white" data-role="tile">
+                                    <div class="tile-content iconic">
+                                        <span class="icon mif-question"></span>
+                                    </div>
+                                    <span class="tile-label">Help</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="dashboard-info" ng-controller="DashboardInfoController as ctrl" class="window shadow fullscreen-dialog"
-             data-role="dialog" data-overlay="true" data-overlay-color="modal-overlay" data-close-button="true">
-            <div class="window-caption bg-white padding10">
-                <span class="window-caption-title cursor-edit" contenteditable="true" ng-blur="ctrl.onTitleBlur($event)">New Dashboard Title</span>
-            </div>
-            <div class="window-content" id="dashboard-content">
-                
-            </div>
+        <div class="page-content" id="main-content" ui-view="">
+            <!-- Page content will render here -->
         </div>
         <script type="text/javascript">
             var baseUrl = '../';
         </script>
         <script type="text/javascript" src="../public/js/lib/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="../public/js/lib/metro.min.js"></script>
+        <script type="text/javascript" src="../public/js/lib/select2.full.min.js"></script>
+        <script type="text/javascript" src="../public/js/lib/tinymce.min.js"></script>
+        <script type="text/javascript" src="../public/js/lib/Chart.min.js"></script>
+        <script type="text/javascript" src="../public/js/lib/moment.min.js"></script>
+        <script type="text/javascript" src="../public/js/lib/fullcalendar.min.js"></script>
+
         <script type="text/javascript" src="../public/js/lib/react.min.js"></script>
         <script type="text/javascript" src="../public/js/lib/react-dom.min.js"></script>
         <script type="text/javascript" src="../public/js/app/dashboard/dashboard-view.js"></script>
         <script type="text/javascript" src="../public/js/app/dashboard/dashboard-info.js"></script>
+        <script type="text/javascript" src="../public/js/app/users/userdata.js"></script>
+        <script type="text/javascript" src="../public/js/app/projects/project-data.js"></script>
+
         <script type="text/javascript" src="../public/js/lib/angular.min.js"></script>
         <script type="text/javascript" src="../public/js/lib/angular-resource.min.js"></script>
-        <script type="text/javascript" src="../public/js/lib/Chart.min.js"></script>
+        <script type="text/javascript" src="../public/js/lib/angular-ui-router.min.js"></script>
         <script type="text/javascript" src="../public/js/main.js"></script>
-        <script type="text/javascript" src="../public/js/app/index.js"></script>
+        <script type="text/javascript" src="../public/js/app/dashboard.js"></script>
+        <script type="text/javascript" src="../public/js/app/users.js"></script>
+        <script type="text/javascript" src="../public/js/app/projects.js"></script>
+        <script type="text/javascript" src="../public/js/app/test_plan.js"></script>
+        <script type="text/javascript" src="../public/js/app/test_lab.js"></script>
+        <script type="text/javascript" src="../public/js/app/issues.js"></script>
+        <script type="text/javascript" src="../public/js/app/calendar.js"></script>
+        <script type="text/javascript" src="../public/js/app/notifications.js"></script>
+        <script type="text/javascript" src="../public/js/app/inbox.js"></script>
+        <script type="text/javascript" src="../public/js/app/profile.js"></script>
     </body>
 </html>

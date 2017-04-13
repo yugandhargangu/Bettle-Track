@@ -1,8 +1,8 @@
-/* global AjaxHelper, baseUrl, tinyMCE, PreLoader */
+/* global AjaxHelper, baseUrl, tinyMCE, PreLoader, bettleTrackApp, CallBackHelper, ProjectCardlayout */
 
 'use strict';
 
-var Urls = {
+var ProjectUrls = {
     project: {
         method: 'GET',
         url: baseUrl + 'server/projects/projects.json'
@@ -37,26 +37,17 @@ var Urls = {
     }
 };
 
-var CallBackHelper = {
-    callbacks: []
-};
-CallBackHelper.add = function (callback) {
-    this.callbacks.push(callback);
-};
-
-var bettleTrackApp = angular.module('bettleTrackApp', ['ngResource', 'ui.router']);
-
 bettleTrackApp.factory('ProjectService', ['$resource', function ($resource) {
         return $resource('/', {}, {
             query: {
-                method: Urls.project.method,
-                url: Urls.project.url,
+                method: ProjectUrls.project.method,
+                url: ProjectUrls.project.url,
                 isArray: false,
                 transformResponse: AjaxHelper.generateResponse
             },
             get: {
-                method: Urls.project_info.method,
-                url: Urls.project_info.url,
+                method: ProjectUrls.project_info.method,
+                url: ProjectUrls.project_info.url,
                 isArray: false,
                 transformResponse: AjaxHelper.generateResponse
             }
@@ -66,14 +57,14 @@ bettleTrackApp.factory('ProjectService', ['$resource', function ($resource) {
 bettleTrackApp.factory('ModuleService', ['$resource', function ($resource) {
         return $resource('/', {}, {
             query: {
-                method: Urls.modules.method,
-                url: Urls.modules.url,
+                method: ProjectUrls.modules.method,
+                url: ProjectUrls.modules.url,
                 isArray: false,
                 transformResponse: AjaxHelper.generateResponse
             },
             get: {
-                method: Urls.module_info.method,
-                url: Urls.module_info.url,
+                method: ProjectUrls.module_info.method,
+                url: ProjectUrls.module_info.url,
                 isArray: false,
                 transformResponse: AjaxHelper.generateResponse
             }
@@ -83,14 +74,14 @@ bettleTrackApp.factory('ModuleService', ['$resource', function ($resource) {
 bettleTrackApp.factory('MemberService', ['$resource', function ($resource) {
         return $resource('/', {}, {
             query: {
-                method: Urls.members.method,
-                url: Urls.members.url,
+                method: ProjectUrls.members.method,
+                url: ProjectUrls.members.url,
                 isArray: false,
                 transformResponse: AjaxHelper.generateResponse
             },
             get: {
-                method: Urls.members.method,
-                url: Urls.members.url,
+                method: ProjectUrls.members.method,
+                url: ProjectUrls.members.url,
                 isArray: false,
                 transformResponse: AjaxHelper.generateResponse
             }
@@ -100,14 +91,14 @@ bettleTrackApp.factory('MemberService', ['$resource', function ($resource) {
 bettleTrackApp.factory('PageService', ['$resource', function ($resource) {
         return $resource('/', {}, {
             query: {
-                method: Urls.pages.method,
-                url: Urls.pages.url,
+                method: ProjectUrls.pages.method,
+                url: ProjectUrls.pages.url,
                 isArray: false,
                 transformResponse: AjaxHelper.generateResponse
             },
             get: {
-                method: Urls.page.method,
-                url: Urls.page.url,
+                method: ProjectUrls.page.method,
+                url: ProjectUrls.page.url,
                 isArray: false,
                 transformResponse: AjaxHelper.generateResponse
             }
@@ -117,80 +108,48 @@ bettleTrackApp.factory('PageService', ['$resource', function ($resource) {
 bettleTrackApp.factory('FieldService', ['$resource', function ($resource) {
         return $resource('/', {}, {
             query: {
-                method: Urls.fields.method,
-                url: Urls.fields.url,
+                method: ProjectUrls.fields.method,
+                url: ProjectUrls.fields.url,
                 isArray: false,
                 transformResponse: AjaxHelper.generateResponse
             },
             get: {
-                method: Urls.fields.method,
-                url: Urls.fields.url,
+                method: ProjectUrls.fields.method,
+                url: ProjectUrls.fields.url,
                 isArray: false,
                 transformResponse: AjaxHelper.generateResponse
             }
         });
     }]);
 
-bettleTrackApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/project/0');
-        $stateProvider.state('project', {
-            url: '/project/:project_id',
-            templateUrl: 'projects/project_data.html',
-            controller: 'ProjectController as ctrl'
-        }).state('project.info', {
-            url: '/info/:project_id',
-            templateUrl: 'projects/project_info.html',
-            controller: 'ProjectInfoController as ctrl'
-        }).state('project.module', {
-            url: '/module/:module_id',
-            templateUrl: 'projects/module_info.html',
-            controller: 'ModuleInfoController as ctrl'
-        }).state('project.members', {
-            url: '/members/:project_id',
-            templateUrl: 'projects/members.html',
-            controller: 'MembersController as ctrl'
-        }).state('project.pages', {
-            url: '/pages/:project_id',
-            templateUrl: 'projects/pages.html',
-            controller: 'PagesController as ctrl'
-        }).state('project.files', {
-            url: '/files/:project_id',
-            templateUrl: 'projects/files.html',
-            controller: 'FilesController as ctrl'
-        }).state('project.fields', {
-            url: '/fields/:module_id',
-            templateUrl: 'projects/fields.html',
-            controller: 'FieldController as ctrl'
-        });
-    }]);
-
-bettleTrackApp.run(function ($rootScope, $timeout) {
-    $rootScope.$on('$viewContentLoaded', function (event) {
-        $timeout(function () {
-            if (CallBackHelper.callbacks.length > 0) {
-                for (var i = 0; i < CallBackHelper.callbacks.length; i++) {
-                    CallBackHelper.callbacks[i]();
-                    CallBackHelper.callbacks.shift();
-                }
-            }
-        });
-    });
-});
-
-// sidebar controller
-bettleTrackApp.controller('SidebarController', ['$rootScope', 'ProjectService', function ($rootScope, ProjectService) {
-        var self = this;
+// List controller
+bettleTrackApp.controller('ProjectsController', ['$rootScope', '$stateParams', '$state', 'ProjectService',
+    function ($rootScope, $stateParams, $state, ProjectService) {
         $rootScope.activeMainMenuItem = 3;
-        $rootScope.project_id = 0;
+        var self = this;
         self.projects = [];
-        ProjectService.query(function (response) {
-            self.projects = response.data.projects;
-        });
+        self.viewMoreCards = function () {
+            ProjectService.query(function (response) {
+                ProjectCardlayout.render({labels: response.data.labels, projects: response.data.projects}, self);
+            });
+        };
+        self.showProjectDetails = function (projectId) {
+            $state.go('project', {project_id: projectId}, {});
+        };
+        self.showTestCases = function (projectId) {
+            $state.go('tp_project', {project_id: projectId}, {});
+        };
+        self.showTestSets = function (projectId) {
+            $state.go('tl_project', {project_id: projectId}, {});
+        };
+        self.viewMoreCards();
+        PreLoader.init();
     }]);
 
 // Main controller
 bettleTrackApp.controller('ProjectController', ['$rootScope', '$stateParams', '$state', 'ModuleService',
     function ($rootScope, $stateParams, $state, ModuleService) {
+        $rootScope.activeMainMenuItem = 3;
         var self = this;
         self.project_id = $stateParams.project_id;
         self.project_name = '';
@@ -305,7 +264,7 @@ bettleTrackApp.controller('FieldController', ['$rootScope', '$stateParams', 'Fie
             self.project_name = response.data.project_name;
             self.fields = response.data.fields;
             self.all_field_types = response.data.types;
-            if ($stateParams.module_id == 0) {
+            if ($stateParams.module_id === 0) {
                 self.module_name = '';
             } else {
                 self.module_name = 'Some Module Name';

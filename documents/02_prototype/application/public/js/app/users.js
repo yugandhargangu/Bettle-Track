@@ -1,8 +1,8 @@
-/* global baseUrl, AjaxHelper, SelectRender, PreLoader */
+/* global baseUrl, AjaxHelper, SelectRender, PreLoader, bettleTrackApp, CallBackHelper, UserCardlayout, UserGroupCardlayout */
 
 'use strict';
 
-var Urls = {
+var UserUrls = {
     groups: {
         list: {
             method: 'GET',
@@ -17,20 +17,11 @@ var Urls = {
     }
 };
 
-var CallBackHelper = {
-    callbacks: []
-};
-CallBackHelper.add = function (callback) {
-    this.callbacks.push(callback);
-};
-
-var bettleTrackApp = angular.module('bettleTrackApp', ['ui.router', 'ngResource']);
-
 bettleTrackApp.factory('UserGroupService', function ($resource) {
     return $resource('/', {}, {
         query: {
-            method: Urls.groups.list.method,
-            url: Urls.groups.list.url,
+            method: UserUrls.groups.list.method,
+            url: UserUrls.groups.list.url,
             isArray: false,
             transformResponse: AjaxHelper.generateResponse
         }
@@ -40,73 +31,24 @@ bettleTrackApp.factory('UserGroupService', function ($resource) {
 bettleTrackApp.factory('UserService', function ($resource) {
     return $resource('/', {}, {
         query: {
-            method: Urls.users.list.method,
-            url: Urls.users.list.url,
+            method: UserUrls.users.list.method,
+            url: UserUrls.users.list.url,
             isArray: false,
             transformResponse: AjaxHelper.generateResponse
         }
     });
 });
 
-bettleTrackApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/usergroups');
-        $stateProvider.state('users', {
-            url: '/users/:group_id',
-            templateUrl: 'users/users.html',
-            controller: 'UserController as ctrl'
-        }).state('users.userinfo', {
-            url: '/userinfo/:id',
-            templateUrl: 'users/userinfo.html',
-            controller: 'UserInfoController as ctrl'
-        }).state('users.usergroups', {
-            url: '/user_usergroups/:id',
-            templateUrl: 'users/usergroups.html',
-            controller: 'UserUserGroupsController as ctrl'
-        }).state('usergroups', {
-            url: '/usergroups',
-            templateUrl: 'users/usergroups.html',
-            controller: 'UserGroupController as ctrl'
-        }).state('usergroups.usergroupinfo', {
-            url: '/usergroupinfo/:id',
-            templateUrl: 'users/usergroupinfo.html',
-            controller: 'UserGroupInfoController as ctrl'
-        }).state('usergroups.users', {
-            url: '/usergroup_users/:id',
-            templateUrl: 'users/users.html',
-            controller: 'UserGroupUsersController as ctrl'
-        });
-    }]);
-
-bettleTrackApp.run(function ($rootScope, $timeout) {
-    $rootScope.$on('$viewContentLoaded', function (event) {
-        $timeout(function () {
-            if (CallBackHelper.callbacks.length > 0) {
-                for (var i = 0; i < CallBackHelper.callbacks.length; i++) {
-                    CallBackHelper.callbacks[i]();
-                    CallBackHelper.callbacks.shift();
-                }
-            }
-        });
-    });
-});
-
-// side bar controller
-bettleTrackApp.controller('SidebarController', ['$rootScope', 'UserGroupService',
-    function ($rootScope, UserGroupService) {
-        var self = this;
-        $rootScope.activeMainMenuItem = 2;
-        $rootScope.userGroupId = -1;
-        $rootScope.usergroups = [];
-        UserGroupService.query(function (response) {
-            $rootScope.usergroups = response.data.user_groups;
-            PreLoader.init();
-        });
-    }]);
-
 // user list controller
-bettleTrackApp.controller('UserController', ['$rootScope', '$scope', '$timeout', '$stateParams', '$state', 'UserService',
-    function ($rootScope, $scope, $timeout, $stateParams, $state, UserService) {
+bettleTrackApp.controller('UserController', ['$rootScope', '$scope', '$timeout', '$stateParams', '$state', 'UserService', 'UserGroupService',
+    function ($rootScope, $scope, $timeout, $stateParams, $state, UserService, UserGroupService) {
+        $rootScope.activeMainMenuItem = 2;
         var self = this;
+        self.userInfo = {};
+        self.user_btn_create = true;
+        self.userInfoSubmitted = false;
+        self.users = [];
+        var groupOptions = [{value: 1, label: 'User group one'}, {value: 2, label: 'User group two'}, {value: 3, label: 'User group three'}, {value: 4, label: 'User group four'}];
         self.buttons = {
             add: true,
             active: true,
@@ -121,73 +63,45 @@ bettleTrackApp.controller('UserController', ['$rootScope', '$scope', '$timeout',
         } else {
             self.isUserGroupUsers = false;
         }
-        self.users = [];
-        UserService.query(function (response) {
-            self.users = response.data.users;
-        });
-        self.showUserInfo = function (userId) {
-            $state.go('users.userinfo', {id: userId}, {});
-        };
-        self.showuserGroups = function (userId) {
-            $state.go('users.usergroups', {id: userId}, {});
-        };
-    }]);
-
-// user information controller
-bettleTrackApp.controller('UserInfoController', ['$rootScope', '$scope', '$stateParams', '$state', 'UserService',
-    function ($rootScope, $scope, $stateParams, $state, UserService) {
-        var self = this;
-        self.user_btn_create = ($stateParams.id == 0);
-        self.userInfo = {};
-        self.userInfoSubmitted = false;
-        var groupOptions = [];
-        for (var i = 0; i < $rootScope.usergroups.length; i++) {
-            groupOptions.push({
-                value: $rootScope.usergroups[i].id,
-                label: $rootScope.usergroups[i].name
+        self.viewMoreCards = function () {
+            UserService.query(function (response) {
+                self.users = response.data.users;
+                UserCardlayout.render({labels: response.data.labels, users: response.data.users}, self);
             });
-        }
+        };
+        self.showUserInfo = function (userId) {
+            self.user_btn_create = (userId === 0);
+            $('#user-info-form').slideDown(200);
+            $('#users-search').hide();
+            $('#users-list').slideUp(200);
+            SelectRender.render('userinfo_usergroup', {
+                options: groupOptions,
+                values: [],
+                multiple: true
+            }, true, false, 'None');
+        };
+        self.hideUserInfo = function () {
+            $('#user-info-form').slideUp(200);
+            $('#users-search').show();
+            $('#users-list').slideDown(200);
+        };
         self.submitUserInfo = function (valid) {
             self.userInfoSubmitted = true;
             if (valid) {
 
             }
         };
-        CallBackHelper.add(function () {
-            var dialog = $('#user-info').data('dialog');
-            dialog.open();
-            SelectRender.render('userinfo_usergroup', {
-                options: groupOptions,
-                values: [],
-                multiple: true
-            }, true, false, 'None');
-        });
-    }]);
+        self.showUserGroups = function (userId) {
 
-// user usergroups controller
-bettleTrackApp.controller('UserUserGroupsController', ['$timeout', '$stateParams', '$state', 'UserGroupService',
-    function ($timeout, $stateParams, $state, UserGroupService) {
-        var self = this;
-        self.buttons = {
-            add: false,
-            active: true,
-            block: true,
-            delete: true,
-            action: false
         };
-        self.usergroups = [];
-        UserGroupService.query(function (response) {
-            self.usergroups = response.data.user_groups;
-        });
-        CallBackHelper.add(function () {
-            var dialog = $('#user-info').data('dialog');
-            dialog.open();
-        });
+        self.viewMoreCards();
+        PreLoader.init();
     }]);
 
 // user group list controller
 bettleTrackApp.controller('UserGroupController', ['$rootScope', '$stateParams', '$state', 'UserGroupService',
     function ($rootScope, $stateParams, $state, UserGroupService) {
+        $rootScope.activeMainMenuItem = 2;
         var self = this;
         self.buttons = {
             add: true,
@@ -196,55 +110,36 @@ bettleTrackApp.controller('UserGroupController', ['$rootScope', '$stateParams', 
             delete: true,
             action: true
         };
-        $rootScope.userGroupId = -1;
-        self.usergroups = [];
-        UserGroupService.query(function (response) {
-            self.usergroups = response.data.user_groups;
-        });
-        self.showUserGroupInfo = function (groupId) {
-            $state.go('usergroups.usergroupinfo', {id: groupId}, {});
-        };
-        self.showGroupUsers = function (groupId) {
-            $state.go('usergroups.users', {id: groupId}, {});
-        };
-    }]);
-
-// user group information controller
-bettleTrackApp.controller('UserGroupInfoController', ['$scope', '$stateParams', '$state', 'UserService',
-    function ($scope, $stateParams, $state, UserService) {
-        var self = this;
         self.user_btn_create = true;
         self.userGroupInfo = {};
         self.userGroupInfoSubmitted = false;
+        $rootScope.userGroupId = -1;
+        self.usergroups = [];
+        self.viewMoreCards = function () {
+            UserGroupService.query(function (response) {
+                UserGroupCardlayout.render({labels: response.data.labels, user_groups: response.data.user_groups}, self);
+            });
+        };
         self.submitUserGroupInfo = function (valid) {
             self.userGroupInfoSubmitted = true;
             if (valid) {
 
             }
         };
-        CallBackHelper.add(function () {
-            var dialog = $('#user-group-info').data('dialog');
-            dialog.open();
-        });
-    }]);
-
-// user group users controller
-bettleTrackApp.controller('UserGroupUsersController', ['$stateParams', '$state', 'UserService',
-    function ($stateParams, $state, UserService) {
-        var self = this;
-        self.buttons = {
-            add: false,
-            active: true,
-            block: true,
-            delete: true,
-            action: false
+        self.showUserGroupInfo = function (groupId) {
+            self.user_btn_create = (groupId === 0);
+            $('#user-group-form').slideDown(200);
+            $('#user-group-search').hide();
+            $('#user-groups-list').slideUp(200);
         };
-        self.users = [];
-        UserService.query(function (response) {
-            self.users = response.data.users;
-        });
-        CallBackHelper.add(function () {
-            var dialog = $('#user-group-info').data('dialog');
-            dialog.open();
-        });
+        self.hideUserGroupInfo = function () {
+            $('#user-group-form').slideUp(200);
+            $('#user-group-search').show();
+            $('#user-groups-list').slideDown(200);
+        };
+        self.showGroupUsers = function (groupId) {
+            $state.go('users', {group_id: groupId}, {});
+        };
+        self.viewMoreCards();
+        PreLoader.init();
     }]);

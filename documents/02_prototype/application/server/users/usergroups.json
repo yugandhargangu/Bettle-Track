@@ -1,64 +1,126 @@
 {
+    "labels": {
+        "status": "Status: ",
+        "active": "Active",
+        "blocked": "Blocked",
+        "group_name": "Group Name",
+        "email_id": "Email Id: ",
+        "total_users": "Total Users: ",
+        "active_users": "Active Users: ",
+        "edit": "Edit",
+        "view_users": "View Users",
+        "block": "Block",
+        "activate": "Activate",
+        "delete": "Delete"
+    },
     "user_groups": [
         {
             "id": 1,
             "name": "User Group One",
             "email_id": "user_group_one@example.com",
-            "status": 1
+            "status": 1,
+            "total_users": 40,
+            "active_users": 15,
+            "img_src": "../public/img/user-group.png"
         },
         {
             "id": 2,
             "name": "User Group Two",
             "email_id": "user_group_two@example.com",
-            "status": 0
+            "status": 0,
+            "total_users": 40,
+            "active_users": 15,
+            "img_src": "../public/img/user-group.png"
         },
         {
             "id": 3,
             "name": "User Group Three",
             "email_id": "user_group_three@example.com",
-            "status": 1
+            "status": 1,
+            "total_users": 40,
+            "active_users": 15,
+            "img_src": "../public/img/user-group.png"
         },
         {
             "id": 4,
             "name": "User Group Four",
             "email_id": "user_group_four@example.com",
-            "status": 0
+            "status": 0,
+            "total_users": 40,
+            "active_users": 15,
+            "img_src": "../public/img/user-group.png"
         },
         {
             "id": 5,
             "name": "User Group Five",
             "email_id": "user_group_five@example.com",
-            "status": 1
+            "status": 1,
+            "total_users": 40,
+            "active_users": 15,
+            "img_src": "../public/img/user-group.png"
         },
         {
             "id": 6,
             "name": "User Group Six",
             "email_id": "user_group_six@example.com",
-            "status": 0
+            "status": 0,
+            "total_users": 40,
+            "active_users": 15,
+            "img_src": "../public/img/user-group.png"
         },
         {
             "id": 7,
             "name": "User Group Seven",
             "email_id": "user_group_seven@example.com",
-            "status": 1
+            "status": 1,
+            "total_users": 40,
+            "active_users": 15,
+            "img_src": "../public/img/user-group.png"
         },
         {
             "id": 8,
             "name": "User Group Eight",
             "email_id": "user_group_eight@example.com",
-            "status": 0
+            "status": 0,
+            "total_users": 40,
+            "active_users": 15,
+            "img_src": "../public/img/user-group.png"
         },
         {
             "id": 9,
             "name": "User Group Nine",
             "email_id": "user_group_nine@example.com",
-            "status": 1
+            "status": 1,
+            "total_users": 40,
+            "active_users": 15,
+            "img_src": "../public/img/user-group.png"
         },
         {
             "id": 10,
             "name": "User Group Ten",
             "email_id": "user_group_ten@example.com",
-            "status": 0
+            "status": 0,
+            "total_users": 40,
+            "active_users": 15,
+            "img_src": "../public/img/user-group.png"
+        },
+        {
+            "id": 11,
+            "name": "User Group Eleven",
+            "email_id": "user_group_ten@example.com",
+            "status": 0,
+            "total_users": 40,
+            "active_users": 15,
+            "img_src": "../public/img/user-group.png"
+        },
+        {
+            "id": 12,
+            "name": "User Group Twelve",
+            "email_id": "user_group_ten@example.com",
+            "status": 0,
+            "total_users": 40,
+            "active_users": 15,
+            "img_src": "../public/img/user-group.png"
         }
     ]
 }
