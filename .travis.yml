@@ -1,12 +1,10 @@
-
 language: java
-
-before_install: 
-  - cd application/bettle/
-  - chmod +x gradlew
-
+before_install:
+- cd application/bettle/
+- chmod +x gradlew
 script: "./gradlew clean build"
-
 jdk:
-
-  - oraclejdk8
+- oraclejdk8
+notifications:
+  slack:
+    secure: mkZIm9HeWVRiQp4x1AzXrnAIzS11d4wYzE4Dnj5JsRKVL74hvxzslQQpcy01aeI1/7TvpKzchgiQEp1ljCmJfgQQLMMXfrza0mpG0jPkfHC5cvArlBFuxUxMVb6SIKrX6tcuwgEVLFpSLE64Zd7C3yVX6DiwcQqTmJ0l0CQ3JcKIOAzymO4SzOOn+UlnetEWCKJ2w03OASJ8stUngwzRxJ7nQErU/ULsjlyf5q0tS2FhCgJHOsnFLkcxZwFLSSZJEh0+49NJ9Ssexw39YFLlN7XY9mmaKRNgQfLa+doeyz2mmHqghCVc89q1T5/kwNNPK/zCbSqxtvunpx+XUvhwUDpUdihW1EVcnK7EKzxR14I35BICcsn71GGG37iYagQhboZdGcydYtxGLvXHT6kdY0/9xooMwIus/R5jJR4ypz5/83iLFySOYV3Pg6r01iZS/jsbi20mb8DlYzYulQaRloV2qjDnI+FFpJ7DvU1583G1h5JwENXxRmyG0qMotUBRM1x21blE/usqvHzKg+9CHeGaFIlccZGmLHCMhEix5SAgcy12c0PmK+JGuOyMVWcmX7v0/D89LeJTIE8EELypCaqgm8/pIPg8Jxka3URh00O0UPn5bcbSh10SnzH8tzg9i4d0xY7ywEDRwp3tRd7YbNbRw1ltaMi9nKEA0C95WWs=
