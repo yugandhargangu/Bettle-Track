@@ -1,0 +1,165 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '1.5.1.RELEASE'
+    id "org.akhikhl.gretty" version "1.4.0"
+}
+
+apply plugin: 'application'
+apply plugin: 'java'
+apply plugin: "org.springframework.boot"
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'org.akhikhl.gretty'
+
+repositories {
+    jcenter()
+}
+
+mainClassName = 'com.bettle.track.SpringBootWebApplication'
+
+dependencies {
+    compileOnly "org.projectlombok:lombok:1.16.14"
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+    compile "org.thymeleaf:thymeleaf-spring4"
+    compile "org.springframework.boot:spring-boot-starter-logging"
+    compile "org.hibernate:hibernate-java8:5.2.6.Final"
+
+    compile(project(':bettle-common')) {
+        exclude module: 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+    }
+    compile(project(':bettle-entity')) {
+        exclude module: 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+        exclude module: 'org.hibernate:hibernate-java8'
+    }
+    compile(project(':bettle-service'))
+    compile(project(':bettle-jpa')) {
+        exclude module: 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+    }
+    compile(project(':bettle-mongodb')) {
+        exclude module: 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+    }
+    compile(project(':bettle-service')) {
+        exclude module: 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    }
+
+    providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
+
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "com.h2database:h2:1.4.193"
+}
+
+bootRun {
+    addResources = true
+}
+
+springBoot {
+    backupSource = false
+}
+
+bootRepackage {
+    mainClass = 'com.bettle.SpringBootWebApplication'
+}
+
+war {
+    baseName = 'Bettle'
+    version = '1.0.0-BETA'
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    tasks.withType(JavaCompile) {
+        options.incremental = true
+    }
+}
+
+subprojects {
+    group = 'com.bettle'
+    version = '1.0.0-BETA'
+}
+
+task createStandardWar(type: War, dependsOn: classes) {
+    baseName = 'bettle'
+    destinationDir = file("$buildDir/dist")
+}
+
+task createMySqlWar(type: War, dependsOn: classes) {
+    baseName = 'bettle-mysql'
+    destinationDir = file("$buildDir/dist")
+    from('configs/mysql') {
+        include 'application.yml'
+        into 'WEB-INF/classes'
+    }
+    from('configs/mysql') {
+        include 'mysql-connector-java-5.1.40-bin.jar'
+        into 'WEB-INF/lib'
+    }
+}
+
+task createOracleWar(type: War, dependsOn: classes) {
+    baseName = 'bettle-oracle'
+    destinationDir = file("$buildDir/dist")
+    from('configs/oracle') {
+        include 'application.yml'
+        into 'WEB-INF/classes'
+    }
+    from('configs/oracle') {
+        include 'ojdbc7.jar'
+        into 'WEB-INF/lib'
+    }
+}
+
+task createDB2War(type: War, dependsOn: classes) {
+    baseName = 'bettle-db2'
+    destinationDir = file("$buildDir/dist")
+    from('configs/db2') {
+        include 'application.yml'
+        into 'WEB-INF/classes'
+    }
+    from('configs/db2') {
+        include 'db2jcc4.jar'
+        into 'WEB-INF/lib'
+    }
+}
+
+task createPostgresqlWar(type: War, dependsOn: classes) {
+    baseName = 'bettle-postgresql'
+    destinationDir = file("$buildDir/dist")
+    from('configs/postgresql') {
+        include 'application.yml'
+        into 'WEB-INF/classes'
+    }
+    from('configs/postgresql') {
+        include 'postgresql-9.4.1212.jar'
+        into 'WEB-INF/lib'
+    }
+}
+
+task createSqlWar(type: War, dependsOn: classes) {
+    baseName = 'bettle-sql-server'
+    destinationDir = file("$buildDir/dist")
+    from('configs/sql') {
+        include 'application.yml'
+        into 'WEB-INF/classes'
+    }
+    from('configs/sql') {
+        include 'sqljdbc42.jar'
+        into 'WEB-INF/lib'
+    }
+}
+
+task createDists(dependsOn: [createStandardWar, createMySqlWar, createOracleWar, createDB2War, createPostgresqlWar, createSqlWar])

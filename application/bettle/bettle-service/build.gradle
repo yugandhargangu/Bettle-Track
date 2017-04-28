@@ -1,0 +1,17 @@
+apply plugin: "java"
+
+dependencies {
+    compileOnly "org.projectlombok:lombok:1.16.14"
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+
+    compile(project(':bettle-common')) {
+        exclude module: 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+    }
+    compile(project(":bettle-entity")) {
+        exclude module: 'org.springframework.boot:spring-boot-starter-thymeleaf'
+        exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+        exclude module: 'org.hibernate:hibernate-java8'
+    }
+    compile(project(':bettle-repo'))
+}
