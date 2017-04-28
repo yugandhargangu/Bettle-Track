@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:db2://myhost:5021/bettle
+    username: bettle
+    password: bettle
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      dialect: org.hibernate.dialect.DB2Dialect
+  messages:
+    basename: i18n/messages
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+      hibernate: ERROR

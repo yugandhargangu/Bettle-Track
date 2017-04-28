@@ -101,7 +101,7 @@ task createMySqlWar(type: War, dependsOn: classes) {
     baseName = 'bettle-mysql'
     destinationDir = file("$buildDir/dist")
     from('configs/mysql') {
-        include 'application.properties'
+        include 'application.yml'
         into 'WEB-INF/classes'
     }
     from('configs/mysql') {
@@ -114,7 +114,7 @@ task createOracleWar(type: War, dependsOn: classes) {
     baseName = 'bettle-oracle'
     destinationDir = file("$buildDir/dist")
     from('configs/oracle') {
-        include 'application.properties'
+        include 'application.yml'
         into 'WEB-INF/classes'
     }
     from('configs/oracle') {
@@ -127,7 +127,7 @@ task createDB2War(type: War, dependsOn: classes) {
     baseName = 'bettle-db2'
     destinationDir = file("$buildDir/dist")
     from('configs/db2') {
-        include 'application.properties'
+        include 'application.yml'
         into 'WEB-INF/classes'
     }
     from('configs/db2') {
@@ -140,7 +140,7 @@ task createPostgresqlWar(type: War, dependsOn: classes) {
     baseName = 'bettle-postgresql'
     destinationDir = file("$buildDir/dist")
     from('configs/postgresql') {
-        include 'application.properties'
+        include 'application.yml'
         into 'WEB-INF/classes'
     }
     from('configs/postgresql') {
@@ -153,7 +153,7 @@ task createSqlWar(type: War, dependsOn: classes) {
     baseName = 'bettle-sql-server'
     destinationDir = file("$buildDir/dist")
     from('configs/sql') {
-        include 'application.properties'
+        include 'application.yml'
         into 'WEB-INF/classes'
     }
     from('configs/sql') {
