@@ -9,3 +9,4 @@ dependencies {
         exclude module: 'org.hibernate:hibernate-java8'
     }
 }
+
